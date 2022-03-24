@@ -1,17 +1,13 @@
 package com.example.myapplication.toyproject.login.presenter.chatting
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.onNavDestinationSelected
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.toyproject.R
 import com.example.myapplication.toyproject.databinding.FragmentFriendListBinding
@@ -46,13 +42,18 @@ class FriendListFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.viewModel = viewModel
-        binding.userName.text = viewModel.getUserName()
-        binding.toolbar.inflateMenu(R.menu.friend_list_fragment_menu)
-        binding.toolbar.setOnMenuItemClickListener { item ->
-            optionClicked(item)
+        binding.apply {
+            viewModel =
+                ViewModelProvider(this@FriendListFragment, ViewModelFactory(userRepository)).get(
+                    FriendListViewModel::class.java
+                )
+            userName.text = viewModel.getUserName()
+            toolbar.inflateMenu(R.menu.friend_list_fragment_menu)
+            toolbar.setOnMenuItemClickListener { item ->
+                optionClicked(item)
+            }
+            recyclerView.layoutManager = LinearLayoutManager(context)
         }
-        binding.recyclerView.layoutManager = LinearLayoutManager(context)
         observeViewModel()
     }
 
@@ -81,8 +82,6 @@ class FriendListFragment : BaseFragment() {
     }
 
     private fun goToAddListFragment(actionId: Int): Boolean {
-//        val navController = findNavController()
-//        return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
         findNavController().navigate(actionId)
         return true
     }
