@@ -52,6 +52,7 @@
             style="@style/editTextStyle"
             android:hint="이름"
             android:inputType="text"
+            android:text="@={signUpViewModel.name}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view" />
@@ -62,6 +63,7 @@
             style="@style/editTextStyle"
             android:hint="휴대전화(-없이 입력)"
             android:inputType="number"
+            android:text="@={signUpViewModel.phone}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_name" />
@@ -71,6 +73,7 @@
             style="@style/editTextStyle"
             android:hint="아이디"
             android:inputType="textEmailAddress"
+            android:text="@={signUpViewModel.id}"
             app:layout_constraintEnd_toStartOf="@+id/check_id_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_number" />
@@ -80,6 +83,7 @@
             style="@style/editTextStyle"
             android:hint="비밀번호"
             android:inputType="textPassword"
+            android:text="@={signUpViewModel.password}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_id" />

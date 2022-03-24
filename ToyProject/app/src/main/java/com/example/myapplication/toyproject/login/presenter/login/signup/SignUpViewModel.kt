@@ -20,13 +20,12 @@ class SignUpViewModel(private val repository: UserDataRepository) : FireBaseView
     val registerSuccess: LiveData<String>
         get() = _registerSuccess
 
-    lateinit var name: String
-    lateinit var phone: String
-    lateinit var id: String
-    lateinit var password: String
+    var name: String = ""
+    var phone: String = ""
+    var id: String = ""
+    var password: String = ""
 
-
-    fun createAccount(name: String, phone: String, id: String, password: String) {
+    fun createAccount() {
         if (name.isNotEmpty() && phone.isNotEmpty() &&
             id.isNotEmpty() && password.isNotEmpty()
         ) {

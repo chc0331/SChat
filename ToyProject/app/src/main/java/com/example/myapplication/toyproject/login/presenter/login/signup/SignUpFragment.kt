@@ -23,6 +23,11 @@ class SignUpFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sign_up, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.apply {
             signUpFragment = this@SignUpFragment
             lifecycleOwner = this@SignUpFragment
@@ -30,11 +35,6 @@ class SignUpFragment : BaseFragment() {
                 ViewModelProvider(this@SignUpFragment, ViewModelFactory(userRepository))
                     .get(SignUpViewModel::class.java)
         }
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         observeViewModel()
     }
 
@@ -53,10 +53,7 @@ class SignUpFragment : BaseFragment() {
         if (!NetworkHandler.isNetworkAvailable(context)) {
             Toast.makeText(context, "네트워크 연결이 안되어 있습니다.", Toast.LENGTH_SHORT).show()
         } else {
-            binding.signUpViewModel?.createAccount(
-                binding.editName.text.toString(), binding.editNumber.text.toString(),
-                binding.editId.text.toString(), binding.editPw.text.toString()
-            )
+            binding.signUpViewModel?.createAccount()
         }
     }
 }

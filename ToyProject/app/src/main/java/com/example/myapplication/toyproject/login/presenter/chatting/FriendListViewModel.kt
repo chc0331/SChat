@@ -16,7 +16,6 @@ class FriendListViewModel(private val repository: UserDataRepository) : FireBase
         get() = _friendList
 
     fun getFriends() {
-//        repository.getUsers()
         repository.getAllFriends(_friendList)
     }
 }
