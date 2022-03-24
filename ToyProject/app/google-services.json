@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "671629050146",
+    "project_id": "schat-3054d",
+    "storage_bucket": "schat-3054d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:671629050146:android:e00bc59923f7fcb44aa57b",
+        "android_client_info": {
+          "package_name": "com.example.myapplication.toyproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "671629050146-ptis6tn39qvm48rkedlu8rkd22evjebl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myapplication.toyproject",
+            "certificate_hash": "e397cf8cb5a2736540024d7b1095f29b758de40c"
+          }
+        },
+        {
+          "client_id": "671629050146-0sjmrs58rv0bhti0tfastucphl2di1d3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-iSRgXPuZXlk-9JI7WqSUDz8pAwfatpQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "671629050146-0sjmrs58rv0bhti0tfastucphl2di1d3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

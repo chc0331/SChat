@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="400dp"
+    android:background="@color/light_blue_3"
+    tools:context=".login.presenter.login.findid.FindIdFragment">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:text="계정 정보를 잊으셨나요?"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="wrap_content"
+        android:layout_height="2dp"
+        android:layout_below="@+id/title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/dark_gray" />
+
+    <TextView
+        android:id="@+id/text_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view"
+        android:layout_alignLeft="@+id/view"
+        android:layout_alignTop="@+id/edit_name"
+        android:layout_marginTop="12dp"
+        android:text="이름"
+        android:textColor="@color/dark_gray"
+        android:textSize="16dp" />
+
+    <EditText
+        android:id="@+id/edit_name"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/view"
+        android:layout_alignRight="@+id/view"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_toRightOf="@+id/text_name"
+        android:background="@drawable/edit_text_border"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/text_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_name"
+        android:layout_alignLeft="@+id/text_name"
+        android:layout_alignTop="@+id/edit_number"
+        android:layout_marginTop="12dp"
+        android:text="휴대전화"
+        android:textColor="@color/dark_gray"
+        android:textSize="16dp" />
+
+    <EditText
+        android:id="@+id/edit_number"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/edit_name"
+        android:layout_alignLeft="@+id/edit_name"
+        android:layout_alignRight="@+id/edit_name"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@+id/text_number"
+        android:background="@drawable/edit_text_border"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+
+    <EditText
+        android:id="@+id/edit_authenticate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_number"
+        android:layout_alignLeft="@+id/edit_number"
+        android:layout_marginTop="20dp"
+        android:layout_toLeftOf="@+id/send_number_button"
+        android:backgroundTint="@color/dark_gray"
+        android:ems="10"
+        android:hint="인증번호"
+        android:inputType="textPersonName"
+        android:textSize="15dp" />
+
+    <Button
+        android:id="@+id/send_number_button"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@+id/edit_number"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/dark_gray"
+        android:text="인증번호 발송"
+        android:textSize="8dp" />
+
+    <Button
+        android:id="@+id/button_finish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/light_blue_2"
+        android:text="확인" />
+
+
+</RelativeLayout>
