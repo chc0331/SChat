@@ -10,7 +10,7 @@ import com.example.myapplication.data.repositoryimpl.UserDataRepositoryImpl
 open class BaseFragment : Fragment() {
     lateinit var userRepository: UserDataRepository
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) { //
         super.onCreate(savedInstanceState)
         userRepository = UserDataRepositoryImpl(
             LocalDataRepositoryImpl(context?.applicationContext),
