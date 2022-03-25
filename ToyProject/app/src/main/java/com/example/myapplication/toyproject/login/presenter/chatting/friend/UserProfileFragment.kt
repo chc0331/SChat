@@ -51,7 +51,7 @@ class UserProfileFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.name.observe(viewLifecycleOwner, {
+        viewModel.name.observe(viewLifecycleOwner, { //이렇게 하지 않고 databinding에 variable에 viewmodel을 써서 해당 textView가 직접 viewmodel값을 observe 할수 있도록 바꿔주시면 더 깔끔할 것 같네요 이때 binding에 livecycleowner설정하는거 잊지 마시고요!
             Log.d("heec.choi", "observeViewModel $it")
             binding.userName.text = it
         })
