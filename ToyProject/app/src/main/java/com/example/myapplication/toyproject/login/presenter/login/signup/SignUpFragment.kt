@@ -33,7 +33,7 @@ class SignUpFragment : BaseFragment() {
             lifecycleOwner = this@SignUpFragment
             signUpViewModel =
                 ViewModelProvider(this@SignUpFragment, ViewModelFactory(userRepository))
-                    .get(SignUpViewModel::class.java)
+                    .get(SignUpViewModel::class.java) //여기는 binding 밖으로 뺴도 될거같아용 !
         }
         observeViewModel()
     }
