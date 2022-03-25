@@ -57,7 +57,7 @@ class SignUpViewModel(private val repository: UserDataRepository) : FireBaseView
 
     private fun getMessage(task: Task<AuthResult>): String {
         return if (task.isSuccessful)
-            "계정 생성 성공"
+            "계정 생성 성공" //이런 상수들 따로 모아서 앞에 fragment랑 같이 사용할수 있도록 클래스 하나 따로 뺴주세요
         else {
             when (task.exception) {
                 is FirebaseAuthUserCollisionException -> "아이디(이메일)가 중복됩니다."
