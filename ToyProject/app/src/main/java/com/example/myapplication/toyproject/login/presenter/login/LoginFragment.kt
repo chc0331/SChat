@@ -22,14 +22,14 @@ import com.google.firebase.ktx.Firebase
 class LoginFragment : BaseFragment() {
 
     private lateinit var binding: FragmentLoginBinding
-    private lateinit var viewModel: LoginViewModel
+    private lateinit var viewModel: LoginViewModel //private val viewModel: LoginViewModel by lazy {ViewModelProvider()} -> val이 more safety 합니다
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel =
             ViewModelProvider(this, ViewModelFactory(userRepository)).get(
                 LoginViewModel::class.java
-            )
+            ) // 위에 저렇게 해주면 여기 코드는 필요 없겟쥬
     }
 
     override fun onCreateView(
