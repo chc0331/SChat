@@ -25,7 +25,7 @@ class SignUpViewModel(private val repository: UserDataRepository) : FireBaseView
     var id: String = ""
     var password: String = ""
 
-    fun createAccount() {
+    fun createAccount() { //if (name.isEmpty() || phone.isEmpty() ~ ) return 하면 아래 코드들 indent가 좀 줄거같네요
         if (name.isNotEmpty() && phone.isNotEmpty() &&
             id.isNotEmpty() && password.isNotEmpty()
         ) {
