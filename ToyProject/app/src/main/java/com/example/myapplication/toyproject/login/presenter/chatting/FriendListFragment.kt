@@ -12,22 +12,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.toyproject.R
 import com.example.myapplication.toyproject.databinding.FragmentFriendListBinding
 import com.example.myapplication.toyproject.login.core.BaseFragment
-import com.example.myapplication.toyproject.login.presenter.chatting.friend.adapter.FriendListAdapter
+import com.example.myapplication.toyproject.login.presenter.chatting.adapter.FriendListAdapter
 import com.example.myapplication.toyproject.login.presenter.viewmodel.ViewModelFactory
+import com.example.myapplication.toyproject.login.util.getCurrentUserName
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class FriendListFragment : BaseFragment() {
 
+    private val friendListAdapter = FriendListAdapter()
     private lateinit var binding: FragmentFriendListBinding
-    private lateinit var adapter: FriendListAdapter
-    private lateinit var viewModel: FriendListViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel =
-            ViewModelProvider(this, ViewModelFactory(userRepository)).get(
-                FriendListViewModel::class.java
-            )
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,25 +41,25 @@ class FriendListFragment : BaseFragment() {
                 ViewModelProvider(this@FriendListFragment, ViewModelFactory(userRepository)).get(
                     FriendListViewModel::class.java
                 )
-            userName.text = viewModel.getUserName()
+            userName.text = Firebase.auth.getCurrentUserName()
             toolbar.inflateMenu(R.menu.friend_list_fragment_menu)
             toolbar.setOnMenuItemClickListener { item ->
                 optionClicked(item)
             }
             recyclerView.layoutManager = LinearLayoutManager(context)
+            recyclerView.adapter = friendListAdapter
         }
         observeViewModel()
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.getFriends()
+        binding.viewModel?.getFriends()
     }
 
     private fun observeViewModel() {
-        binding.viewModel?.friendList?.observe(viewLifecycleOwner, {
-            adapter = FriendListAdapter(it)
-            binding.recyclerView.adapter = adapter
+        binding.viewModel?.friendList?.observe(viewLifecycleOwner, { it ->
+            friendListAdapter.submitList(it)
         })
     }
 
