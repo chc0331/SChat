@@ -37,7 +37,8 @@ class FriendListFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
-            viewModel =
+            lifecycleOwner = this@FriendListFragment
+            vm =
                 ViewModelProvider(this@FriendListFragment, ViewModelFactory(userRepository)).get(
                     FriendListViewModel::class.java
                 )
@@ -54,11 +55,11 @@ class FriendListFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-        binding.viewModel?.getFriends()
+        binding.vm?.getFriends()
     }
 
     private fun observeViewModel() {
-        binding.viewModel?.friendList?.observe(viewLifecycleOwner, { it ->
+        binding.vm?.friendList?.observe(viewLifecycleOwner, { it ->
             friendListAdapter.submitList(it)
         })
     }

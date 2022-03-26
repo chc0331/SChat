@@ -72,9 +72,6 @@
         android:name="com.example.myapplication.toyproject.login.presenter.chatting.friend.EditNameFragment"
         android:label="EditNameFragment"
         tools:layout="@layout/fragment_edit_name">
-        <argument
-            android:name="friend"
-            app:argType="com.example.myapplication.data.model.ParcelableFriend" />
         <action
             android:id="@+id/actionGoBackToUserProfile"
             app:destination="@id/userProfileFragment" />
@@ -88,7 +85,6 @@
             android:id="@+id/actionGoToLoginFragment"
             app:destination="@id/loginFragment"
             app:popUpTo="@id/friendListFragment"
-            app:popUpToInclusive="true"
-            />
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

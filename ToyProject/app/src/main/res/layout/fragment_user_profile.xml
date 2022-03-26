@@ -6,6 +6,14 @@
 
     <data>
 
+        <variable
+            name="fm"
+            type="com.example.myapplication.toyproject.login.presenter.chatting.friend.UserProfileFragment" />
+
+        <variable
+            name="vm"
+            type="com.example.myapplication.toyproject.login.presenter.chatting.friend.UserProfileViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -54,12 +62,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view5" />
 
+
         <TextView
             android:id="@+id/user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="친구 이름"
             android:textSize="20sp"
+            android:text="@={vm.friend.friendName}"
             app:layout_constraintBottom_toTopOf="@+id/view5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -70,6 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/light_blue_3"
+            android:onClick="@{()->fm.goToEditNameFragment()}"
             android:src="@drawable/ic_edit"
             app:layout_constraintStart_toEndOf="@+id/user_name"
             app:layout_constraintTop_toTopOf="@+id/user_name" />

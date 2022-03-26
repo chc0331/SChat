@@ -16,15 +16,6 @@ import com.example.myapplication.toyproject.login.presenter.viewmodel.ViewModelF
 class AddListFragment : BaseFragment() {
 
     private lateinit var binding: FragmentAddListBinding
-    private lateinit var viewModel: AddListViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel =
-            ViewModelProvider(this, ViewModelFactory(userRepository)).get(
-                AddListViewModel::class.java
-            )
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,17 +26,22 @@ class AddListFragment : BaseFragment() {
             inflater, R.layout.fragment_add_list,
             container, false
         )
-        binding.viewModel = this.viewModel
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.apply {
+            lifecycleOwner = this@AddListFragment
+            vm = ViewModelProvider(this@AddListFragment, ViewModelFactory(userRepository)).get(
+                AddListViewModel::class.java
+            )
+        }
         observeViewModel()
     }
 
     private fun observeViewModel() {
-        binding.viewModel?.success?.observe(viewLifecycleOwner, {
+        binding.vm?.success?.observe(viewLifecycleOwner, {
             Toast.makeText(context, if (it) "추가 성공" else "추가 실패", Toast.LENGTH_SHORT).show()
             Navigation.findNavController(binding.button).popBackStack()
         })

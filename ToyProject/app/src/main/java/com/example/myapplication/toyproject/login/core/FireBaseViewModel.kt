@@ -8,7 +8,6 @@ import com.google.firebase.ktx.Firebase
 
 abstract class FireBaseViewModel : ViewModel() {
     val auth: FirebaseAuth = Firebase.auth
-    val fireStore: FirebaseFirestore = FirebaseFirestore.getInstance()
 
     fun getUserName(): String {
         return auth.currentUser?.displayName ?: "nothing"

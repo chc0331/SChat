@@ -31,7 +31,7 @@ class SignUpFragment : BaseFragment() {
         binding.apply {
             signUpFragment = this@SignUpFragment
             lifecycleOwner = this@SignUpFragment
-            signUpViewModel =
+            vm =
                 ViewModelProvider(this@SignUpFragment, ViewModelFactory(userRepository))
                     .get(SignUpViewModel::class.java)
         }
@@ -39,7 +39,7 @@ class SignUpFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        binding.signUpViewModel?.registerSuccess?.observe(viewLifecycleOwner, {
+        binding.vm?.registerSuccess?.observe(viewLifecycleOwner, {
             Toast.makeText(
                 context, it,
                 Toast.LENGTH_SHORT
@@ -53,7 +53,7 @@ class SignUpFragment : BaseFragment() {
         if (!NetworkHandler.isNetworkAvailable(context)) {
             Toast.makeText(context, "네트워크 연결이 안되어 있습니다.", Toast.LENGTH_SHORT).show()
         } else {
-            binding.signUpViewModel?.createAccount()
+            binding.vm?.createAccount()
         }
     }
 }

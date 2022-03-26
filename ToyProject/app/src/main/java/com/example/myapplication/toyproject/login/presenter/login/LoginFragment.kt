@@ -22,14 +22,11 @@ import com.google.firebase.ktx.Firebase
 class LoginFragment : BaseFragment() {
 
     private lateinit var binding: FragmentLoginBinding
-    private lateinit var viewModel: LoginViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel =
-            ViewModelProvider(this, ViewModelFactory(userRepository)).get(
-                LoginViewModel::class.java
-            )
+    private val viewModel: LoginViewModel by lazy {
+        ViewModelProvider(
+            this,
+            ViewModelFactory(userRepository)
+        ).get(LoginViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -81,7 +78,6 @@ class LoginFragment : BaseFragment() {
     }
 
     fun goToSignUpFragment() {
-        Log.d("heec.choi","gotoSignUp")
         val action = LoginFragmentDirections.actionGoToSignUp()
         Navigation.findNavController(binding.signUpText).navigate(action)
     }
