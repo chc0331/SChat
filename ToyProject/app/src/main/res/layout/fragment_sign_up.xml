@@ -7,11 +7,11 @@
 
         <variable
             name="vm"
-            type="com.example.myapplication.toyproject.login.presenter.login.signup.SignUpViewModel" />
+            type="com.example.myapplication.toyproject.presenter.login.signup.SignUpViewModel" />
 
         <variable
             name="signUpFragment"
-            type="com.example.myapplication.toyproject.login.presenter.login.signup.SignUpFragment" />
+            type="com.example.myapplication.toyproject.presenter.login.signup.SignUpFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

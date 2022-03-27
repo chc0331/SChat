@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.myapplication.toyproject.login.presenter.login.LoginFragment"
+        android:name="com.example.myapplication.toyproject.presenter.login.LoginFragment"
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login">
         <action
@@ -25,17 +25,17 @@
 
     <fragment
         android:id="@+id/findIdFragment"
-        android:name="com.example.myapplication.toyproject.login.presenter.login.findid.FindIdFragment"
+        android:name="com.example.myapplication.toyproject.presenter.login.findid.FindIdFragment"
         android:label="fragment_find_id"
         tools:layout="@layout/fragment_find_id" />
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.example.myapplication.toyproject.login.presenter.login.signup.SignUpFragment"
+        android:name="com.example.myapplication.toyproject.presenter.login.signup.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" />
     <fragment
         android:id="@+id/friendListFragment"
-        android:name="com.example.myapplication.toyproject.login.presenter.chatting.FriendListFragment"
+        android:name="com.example.myapplication.toyproject.presenter.chatting.FriendListFragment"
         android:label="fragment_friend_list"
         tools:layout="@layout/fragment_friend_list">
         <action
@@ -50,14 +50,14 @@
     </fragment>
     <fragment
         android:id="@+id/addListFragment"
-        android:name="com.example.myapplication.toyproject.login.presenter.chatting.friend.AddListFragment"
+        android:name="com.example.myapplication.toyproject.presenter.chatting.friend.AddListFragment"
         android:label="AddListFragment"
         tools:layout="@layout/fragment_add_list">
 
     </fragment>
     <fragment
         android:id="@+id/userProfileFragment"
-        android:name="com.example.myapplication.toyproject.login.presenter.chatting.friend.UserProfileFragment"
+        android:name="com.example.myapplication.toyproject.presenter.chatting.friend.UserProfileFragment"
         android:label="UserProfileFragment"
         tools:layout="@layout/fragment_user_profile">
         <argument
@@ -69,7 +69,7 @@
     </fragment>
     <fragment
         android:id="@+id/editNameFragment"
-        android:name="com.example.myapplication.toyproject.login.presenter.chatting.friend.EditNameFragment"
+        android:name="com.example.myapplication.toyproject.presenter.chatting.friend.EditNameFragment"
         android:label="EditNameFragment"
         tools:layout="@layout/fragment_edit_name">
         <action
@@ -79,7 +79,7 @@
 
     <fragment
         android:id="@+id/settingFragment"
-        android:name="com.example.myapplication.toyproject.login.presenter.chatting.setting.SettingFragment"
+        android:name="com.example.myapplication.toyproject.presenter.chatting.setting.SettingFragment"
         android:label="SettingFragment">
         <action
             android:id="@+id/actionGoToLoginFragment"

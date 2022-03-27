@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="400dp"
     android:background="@color/light_blue_3"
-    tools:context=".login.presenter.login.findid.FindIdFragment">
+    tools:context=".presenter.login.findid.FindIdFragment">
 
     <TextView
         android:id="@+id/title"
