@@ -1,4 +1,4 @@
-package com.example.myapplication.toyproject.presenter.chatting.friend
+package com.example.myapplication.toyproject.presenter.chatting.profile
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +11,7 @@ import androidx.navigation.Navigation
 import com.example.myapplication.toyproject.R
 import com.example.myapplication.toyproject.core.BaseFragment
 import com.example.myapplication.toyproject.databinding.FragmentEditNameBinding
+import com.example.myapplication.toyproject.presenter.chatting.profile.friend.FriendProfileViewModel
 import com.example.myapplication.toyproject.presenter.viewmodel.ViewModelFactory
 
 class EditNameFragment : BaseFragment() {
@@ -33,7 +34,7 @@ class EditNameFragment : BaseFragment() {
             lifecycleOwner = this@EditNameFragment
             fm = this@EditNameFragment
             vm = ViewModelProvider(activity!!, ViewModelFactory(userRepository)).get(
-                UserProfileViewModel::class.java
+                FriendProfileViewModel::class.java
             )
         }
     }

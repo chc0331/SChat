@@ -43,21 +43,21 @@
             app:destination="@id/addListFragment" />
         <action
             android:id="@+id/actionGoToUserProfile"
-            app:destination="@id/userProfileFragment" />
+            app:destination="@id/friendProfileFragment" />
         <action
             android:id="@+id/actionGoToSettingFragment"
             app:destination="@id/settingFragment" />
     </fragment>
     <fragment
         android:id="@+id/addListFragment"
-        android:name="com.example.myapplication.toyproject.presenter.chatting.friend.AddListFragment"
+        android:name="com.example.myapplication.toyproject.presenter.chatting.profile.friend.AddListFragment"
         android:label="AddListFragment"
         tools:layout="@layout/fragment_add_list">
 
     </fragment>
     <fragment
-        android:id="@+id/userProfileFragment"
-        android:name="com.example.myapplication.toyproject.presenter.chatting.friend.UserProfileFragment"
+        android:id="@+id/friendProfileFragment"
+        android:name="com.example.myapplication.toyproject.presenter.chatting.profile.friend.FriendProfileFragment"
         android:label="UserProfileFragment"
         tools:layout="@layout/fragment_user_profile">
         <argument
@@ -69,12 +69,12 @@
     </fragment>
     <fragment
         android:id="@+id/editNameFragment"
-        android:name="com.example.myapplication.toyproject.presenter.chatting.friend.EditNameFragment"
+        android:name="com.example.myapplication.toyproject.presenter.chatting.profile.EditNameFragment"
         android:label="EditNameFragment"
         tools:layout="@layout/fragment_edit_name">
         <action
             android:id="@+id/actionGoBackToUserProfile"
-            app:destination="@id/userProfileFragment" />
+            app:destination="@id/friendProfileFragment" />
     </fragment>
 
     <fragment

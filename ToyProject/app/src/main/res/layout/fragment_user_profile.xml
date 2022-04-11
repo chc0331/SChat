@@ -8,18 +8,18 @@
 
         <variable
             name="fm"
-            type="com.example.myapplication.toyproject.presenter.chatting.friend.UserProfileFragment" />
+            type="com.example.myapplication.toyproject.presenter.chatting.profile.friend.FriendProfileFragment" />
 
         <variable
             name="vm"
-            type="com.example.myapplication.toyproject.presenter.chatting.friend.UserProfileViewModel" />
+            type="com.example.myapplication.toyproject.presenter.chatting.profile.friend.FriendProfileViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.myapplication.toyproject.presenter.chatting.friend.UserProfileFragment">
+        tools:context="com.example.myapplication.toyproject.presenter.chatting.profile.friend.FriendProfileFragment">
 
         <View
             android:id="@+id/view4"

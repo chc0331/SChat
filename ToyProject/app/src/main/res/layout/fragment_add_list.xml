@@ -8,7 +8,7 @@
 
         <variable
             name="vm"
-            type="com.example.myapplication.toyproject.presenter.chatting.friend.AddListViewModel" />
+            type="com.example.myapplication.toyproject.presenter.chatting.profile.friend.AddListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

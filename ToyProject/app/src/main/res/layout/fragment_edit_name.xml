@@ -7,11 +7,11 @@
 
         <variable
             name="vm"
-            type="com.example.myapplication.toyproject.presenter.chatting.friend.UserProfileViewModel" />
+            type="com.example.myapplication.toyproject.presenter.chatting.profile.friend.FriendProfileViewModel" />
 
         <variable
             name="fm"
-            type="com.example.myapplication.toyproject.presenter.chatting.friend.EditNameFragment" />
+            type="com.example.myapplication.toyproject.presenter.chatting.profile.EditNameFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

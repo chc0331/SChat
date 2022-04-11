@@ -1,4 +1,4 @@
-package com.example.myapplication.toyproject.presenter.chatting.friend
+package com.example.myapplication.toyproject.presenter.chatting.profile.friend
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,12 +13,12 @@ import com.example.myapplication.toyproject.core.BaseFragment
 import com.example.myapplication.toyproject.databinding.FragmentUserProfileBinding
 import com.example.myapplication.toyproject.presenter.viewmodel.ViewModelFactory
 
-class UserProfileFragment : BaseFragment() {
+class FriendProfileFragment : BaseFragment() {
 
     private lateinit var binding: FragmentUserProfileBinding
     private val friend: ParcelableFriend? by lazy {
         arguments?.let {
-            val args = UserProfileFragmentArgs.fromBundle(it)
+            val args = FriendProfileFragmentArgs.fromBundle(it)
             args.friend
         }
     }
@@ -36,10 +36,10 @@ class UserProfileFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
-            lifecycleOwner = this@UserProfileFragment
-            fm = this@UserProfileFragment
+            lifecycleOwner = this@FriendProfileFragment
+            fm = this@FriendProfileFragment
             vm = ViewModelProvider(activity!!, ViewModelFactory(userRepository)).get(
-                UserProfileViewModel::class.java
+                FriendProfileViewModel::class.java
             )
         }
     }
@@ -52,7 +52,7 @@ class UserProfileFragment : BaseFragment() {
     }
 
     fun goToEditNameFragment() {
-        val action = UserProfileFragmentDirections.actionGoToEditName()
+        val action = FriendProfileFragmentDirections.actionGoToEditName()
         Navigation.findNavController(binding.editButton).navigate(action)
     }
 }

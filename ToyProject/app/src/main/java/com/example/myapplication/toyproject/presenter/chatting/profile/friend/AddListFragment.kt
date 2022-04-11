@@ -1,4 +1,4 @@
-package com.example.myapplication.toyproject.presenter.chatting.friend
+package com.example.myapplication.toyproject.presenter.chatting.profile.friend
 
 import android.os.Bundle
 import android.view.LayoutInflater

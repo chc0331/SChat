@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.toyproject.R
 import com.example.myapplication.toyproject.core.BaseFragment
 import com.example.myapplication.toyproject.databinding.FragmentFriendListBinding
-import com.example.myapplication.toyproject.util.getCurrentUserName
 import com.example.myapplication.toyproject.presenter.chatting.adapter.FriendListAdapter
 import com.example.myapplication.toyproject.presenter.viewmodel.ViewModelFactory
+import com.example.myapplication.toyproject.util.getCurrentUserName
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 

@@ -1,4 +1,4 @@
-package com.example.myapplication.toyproject.presenter.chatting.friend
+package com.example.myapplication.toyproject.presenter.chatting.profile.friend
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
