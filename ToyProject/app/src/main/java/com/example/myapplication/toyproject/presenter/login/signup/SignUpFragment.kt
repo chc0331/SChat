@@ -31,22 +31,27 @@ class SignUpFragment : BaseFragment() {
         binding.apply {
             signUpFragment = this@SignUpFragment
             lifecycleOwner = this@SignUpFragment
-            vm =
-                ViewModelProvider(this@SignUpFragment, ViewModelFactory(userRepository))
-                    .get(SignUpViewModel::class.java)
+            vm = ViewModelProvider(
+                this@SignUpFragment,
+                ViewModelFactory(userRepository)
+            ).get(SignUpViewModel::class.java)
         }
         observeViewModel()
     }
 
     private fun observeViewModel() {
-        binding.vm?.registerSuccess?.observe(viewLifecycleOwner, {
-            Toast.makeText(
-                context, it,
-                Toast.LENGTH_SHORT
-            ).show()
-            if (it.equals("계정 생성 성공"))
-                Navigation.findNavController(binding.registerButton).popBackStack()
-        })
+        binding.vm?.apply {
+            registerToast?.observe(viewLifecycleOwner, {
+                Toast.makeText(
+                    context, it,
+                    Toast.LENGTH_SHORT
+                ).show()
+            })
+            movePage?.observe(viewLifecycleOwner, {
+                if (it)
+                    Navigation.findNavController(binding.registerButton).popBackStack()
+            })
+        }
     }
 
     fun registerClicked() {

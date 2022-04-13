@@ -6,6 +6,9 @@ import com.example.myapplication.data.model.Friend
 import com.example.myapplication.data.repository.UserDataRepository
 import com.example.myapplication.data.set
 import com.example.myapplication.toyproject.core.FireBaseViewModel
+import com.example.myapplication.toyproject.util.getCurrentUserName
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import java.util.*
 
 class FriendListViewModel(private val repository: UserDataRepository) : FireBaseViewModel() {
@@ -14,8 +17,14 @@ class FriendListViewModel(private val repository: UserDataRepository) : FireBase
         MutableLiveData<List<Friend>>().set(Collections.emptyList())
     val friendList: LiveData<List<Friend>>
         get() = _friendList
+    private val _currentUserName: MutableLiveData<String> =
+        MutableLiveData<String>().set(Firebase.auth.getCurrentUserName())
+    val currentUserName: LiveData<String>
+        get() = _currentUserName
 
     fun getFriends() {
-        repository.getAllFriends(_friendList)
+        repository.getAllFriends().subscribe {
+            _friendList.postValue(it)
+        }
     }
 }

@@ -10,6 +10,7 @@ import com.example.myapplication.data.repository.LocalDataDao
 import com.example.myapplication.data.repository.LocalDataRepository
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 class LocalDataRepositoryImpl(context: Context?) : LocalDataRepository {
@@ -38,13 +39,9 @@ class LocalDataRepositoryImpl(context: Context?) : LocalDataRepository {
             }
     }
 
-    override fun getAllFriends(friends: MutableLiveData<List<Friend>>) {
-        localDao?.getAllFriends().subscribeOn(Schedulers.io())
+    override fun getAllFriends(): Flowable<List<Friend>> {
+        return localDao?.getAllFriends().subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                friends.postValue(it)
-                Log.d("heec.choi", "(local)getAllFriends : $it")
-            }
     }
 
     override fun addUser(user: User) {
@@ -74,8 +71,8 @@ class LocalDataRepositoryImpl(context: Context?) : LocalDataRepository {
             }
     }
 
-    override fun deleteFriends(): Completable {
-        return localDao?.deleteFriends().subscribeOn(Schedulers.io())
+    override fun deleteAllFriends(): Completable {
+        return localDao?.deleteAllFriends().subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 

@@ -42,13 +42,12 @@ class FriendListFragment : BaseFragment() {
                 ViewModelProvider(this@FriendListFragment, ViewModelFactory(userRepository)).get(
                     FriendListViewModel::class.java
                 )
-            userName.text = Firebase.auth.getCurrentUserName()
+            recyclerView.layoutManager = LinearLayoutManager(context)
+            recyclerView.adapter = friendListAdapter
             toolbar.inflateMenu(R.menu.friend_list_fragment_menu)
             toolbar.setOnMenuItemClickListener { item ->
                 optionClicked(item)
             }
-            recyclerView.layoutManager = LinearLayoutManager(context)
-            recyclerView.adapter = friendListAdapter
         }
         observeViewModel()
     }
@@ -56,11 +55,15 @@ class FriendListFragment : BaseFragment() {
     override fun onResume() {
         super.onResume()
         binding.vm?.getFriends()
+        binding.userName.text = Firebase.auth.getCurrentUserName()
     }
 
     private fun observeViewModel() {
         binding.vm?.friendList?.observe(viewLifecycleOwner, { it ->
             friendListAdapter.submitList(it)
+        })
+        binding.vm?.currentUserName?.observe(viewLifecycleOwner, { it ->
+            binding.userName.text = it
         })
     }
 

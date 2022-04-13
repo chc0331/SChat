@@ -39,7 +39,7 @@ interface LocalDataDao {
     fun deleteUsers(): Completable
 
     @Query("DELETE FROM friends")
-    fun deleteFriends(): Completable
+    fun deleteAllFriends(): Completable
 
     @Update
     fun updateFriend(friend: Friend): Completable

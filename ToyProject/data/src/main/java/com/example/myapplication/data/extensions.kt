@@ -10,6 +10,11 @@ fun MutableLiveData<List<Friend>>.set(value: List<Friend>): MutableLiveData<List
     return this
 }
 
+fun MutableLiveData<String>.set(value: String): MutableLiveData<String> {
+    this.value = value
+    return this
+}
+
 fun Map<String, Object>.toUser(): User = User(
     this["name"].toString(), this["phone"].toString(),
     this["id"].toString(), this["password"].toString()

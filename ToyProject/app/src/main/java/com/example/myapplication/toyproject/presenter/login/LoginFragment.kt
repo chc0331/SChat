@@ -36,12 +36,12 @@ class LoginFragment : BaseFragment() {
             inflater, R.layout.fragment_login,
             container, false
         )
-        binding.loginFragment = this
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.loginFragment = this
         observeViewModel()
     }
 
@@ -54,8 +54,7 @@ class LoginFragment : BaseFragment() {
 
     private fun observeViewModel() {
         viewModel.loginSuccess.observe(viewLifecycleOwner, {
-            if (it)
-                goToFriendListFragment()
+            if (it) goToFriendListFragment()
             Toast.makeText(context, if (it) "로그인 성공" else "로그인 실패", Toast.LENGTH_SHORT).show()
         })
     }

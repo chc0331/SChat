@@ -3,6 +3,7 @@ package com.example.myapplication.data.repository
 import androidx.lifecycle.MutableLiveData
 import com.example.myapplication.data.model.Friend
 import com.example.myapplication.data.model.User
+import io.reactivex.rxjava3.core.Flowable
 
 interface UserDataRepository {
 
@@ -12,9 +13,9 @@ interface UserDataRepository {
 
     fun getFriend(email: String, result: MutableLiveData<Friend>)
 
-    fun getAllFriends(result: MutableLiveData<List<Friend>>)
+    fun getAllFriends(): Flowable<List<Friend>>
 
-    fun addUser(user: User, result: MutableLiveData<String>)
+    fun addUser(user: User)
 
     fun getUser(email: String, result: MutableLiveData<User>)
 
@@ -22,7 +23,7 @@ interface UserDataRepository {
 
     fun deleteUsers()
 
-    fun deleteFriends()
+    fun deleteAllFriends()
 
     fun updateFriend(friend: Friend)
 }

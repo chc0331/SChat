@@ -1,6 +1,5 @@
 package com.example.myapplication.toyproject.presenter.login.signup
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.myapplication.data.model.User
@@ -16,9 +15,12 @@ import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.ktx.Firebase
 
 class SignUpViewModel(private val repository: UserDataRepository) : FireBaseViewModel() {
-    private val _registerSuccess = MutableLiveData<String>()
-    val registerSuccess: LiveData<String>
-        get() = _registerSuccess
+    private val _resultToast = MutableLiveData<String>()
+    val registerToast: LiveData<String>
+        get() = _resultToast
+    private val _movePage = MutableLiveData<Boolean>()
+    val movePage: LiveData<Boolean>
+        get() = _movePage
 
     var name: String = ""
     var phone: String = ""
@@ -26,32 +28,28 @@ class SignUpViewModel(private val repository: UserDataRepository) : FireBaseView
     var password: String = ""
 
     fun createAccount() {
-        if (name.isNotEmpty() && phone.isNotEmpty() &&
-            id.isNotEmpty() && password.isNotEmpty()
-        ) {
+        if (!isInformationEmpty()) {
             try {
                 auth?.createUserWithEmailAndPassword(id, password)
-                    ?.addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
+                    ?.addOnCompleteListener { create_task ->
+                        if (create_task.isSuccessful) {
                             Firebase.auth.currentUser?.updateProfile(userProfileChangeRequest {
                                 displayName = name
-                            })?.addOnCompleteListener { task2 ->
-                                if (task2.isSuccessful) {
-                                    repository.addUser(
-                                        User(name, phone, id, password),
-                                        _registerSuccess
-                                    )
-                                    _registerSuccess.postValue(getMessage(task))
+                            })?.addOnCompleteListener { update_task ->
+                                if (update_task.isSuccessful) {
+                                    repository.addUser(User(name, phone, id, password))
+                                    _movePage.postValue(true)
                                 }
+                                _resultToast.postValue(getMessage(create_task))
                             }
-                        }
+                        } else
+                            _resultToast.postValue(getMessage(create_task))
                     }
             } catch (e: FirebaseAuthException) {
-                Log.d("heec.choi", e.errorCode)
-                _registerSuccess.postValue("계정 생성 실패")
+                _resultToast.postValue("계정 생성 실패")
             }
         } else {
-            _registerSuccess.postValue("빈칸이 있습니다.")
+            _resultToast.postValue("빈칸이 있습니다.")
         }
     }
 
@@ -66,6 +64,9 @@ class SignUpViewModel(private val repository: UserDataRepository) : FireBaseView
             }
         }
     }
+
+    private fun isInformationEmpty() =
+        name.isEmpty() || phone.isEmpty() || id.isEmpty() || password.isEmpty()
 
     fun checkDuplicatedId(id: String) {
         //todo

@@ -1,5 +1,6 @@
 package com.example.myapplication.data.repositoryimpl
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.myapplication.data.model.Friend
 import com.example.myapplication.data.model.User
@@ -8,6 +9,7 @@ import com.example.myapplication.data.repository.RemoteDataRepository
 import com.example.myapplication.data.repository.UserDataRepository
 import com.example.myapplication.data.toFriend
 import com.google.firebase.firestore.QueryDocumentSnapshot
+import io.reactivex.rxjava3.core.Flowable
 
 class UserDataRepositoryImpl(
     private val localDataRepository: LocalDataRepository,
@@ -16,7 +18,7 @@ class UserDataRepositoryImpl(
 
     override fun initData(email: String) {
         //init friend data
-        localDataRepository.deleteFriends()
+        localDataRepository.deleteAllFriends()
             .doOnComplete {
                 remoteDataRepository.getFriend(email)
                     .addOnCompleteListener { task ->
@@ -27,8 +29,7 @@ class UserDataRepositoryImpl(
                             }
                         }
                     }
-            }
-            .subscribe()
+            }.subscribe()
     }
 
     override fun addFriend(friend: Friend, result: MutableLiveData<Boolean>) {
@@ -48,11 +49,11 @@ class UserDataRepositoryImpl(
     override fun getFriend(email: String, result: MutableLiveData<Friend>) =
         localDataRepository.getFriend(email, result)
 
-    override fun getAllFriends(friends: MutableLiveData<List<Friend>>) {
-        localDataRepository.getAllFriends(friends)
+    override fun getAllFriends(): Flowable<List<Friend>> {
+        return localDataRepository.getAllFriends()
     }
 
-    override fun addUser(user: User, result: MutableLiveData<String>) {
+    override fun addUser(user: User) {
         remoteDataRepository.addUser(user).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 localDataRepository.addUser(user)
@@ -71,8 +72,8 @@ class UserDataRepositoryImpl(
         localDataRepository.deleteUsers()
     }
 
-    override fun deleteFriends() {
-        localDataRepository.deleteFriends()
+    override fun deleteAllFriends() {
+        localDataRepository.deleteAllFriends()
     }
 
     override fun updateFriend(friend: Friend) {
