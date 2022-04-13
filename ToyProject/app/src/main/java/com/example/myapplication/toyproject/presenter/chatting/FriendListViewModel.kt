@@ -17,10 +17,6 @@ class FriendListViewModel(private val repository: UserDataRepository) : FireBase
         MutableLiveData<List<Friend>>().set(Collections.emptyList())
     val friendList: LiveData<List<Friend>>
         get() = _friendList
-    private val _currentUserName: MutableLiveData<String> =
-        MutableLiveData<String>().set(Firebase.auth.getCurrentUserName())
-    val currentUserName: LiveData<String>
-        get() = _currentUserName
 
     fun getFriends() {
         repository.getAllFriends().subscribe {

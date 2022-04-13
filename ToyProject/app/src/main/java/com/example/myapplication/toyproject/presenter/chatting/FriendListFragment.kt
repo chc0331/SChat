@@ -62,9 +62,6 @@ class FriendListFragment : BaseFragment() {
         binding.vm?.friendList?.observe(viewLifecycleOwner, { it ->
             friendListAdapter.submitList(it)
         })
-        binding.vm?.currentUserName?.observe(viewLifecycleOwner, { it ->
-            binding.userName.text = it
-        })
     }
 
     private fun optionClicked(item: MenuItem?): Boolean {
