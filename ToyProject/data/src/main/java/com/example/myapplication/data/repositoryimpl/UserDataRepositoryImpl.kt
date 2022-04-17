@@ -8,15 +8,18 @@ import com.example.myapplication.data.repository.LocalDataRepository
 import com.example.myapplication.data.repository.RemoteDataRepository
 import com.example.myapplication.data.repository.UserDataRepository
 import com.example.myapplication.data.toFriend
+import com.example.myapplication.data.toUser
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.QueryDocumentSnapshot
 import io.reactivex.rxjava3.core.Flowable
+import io.reactivex.rxjava3.core.Maybe
 
 class UserDataRepositoryImpl(
     private val localDataRepository: LocalDataRepository,
     private val remoteDataRepository: RemoteDataRepository
 ) : UserDataRepository {
 
-    override fun initData(email: String) {
+    override fun initFriendData(email: String) {
         //init friend data
         localDataRepository.deleteAllFriends()
             .doOnComplete {
@@ -32,19 +35,21 @@ class UserDataRepositoryImpl(
             }.subscribe()
     }
 
-    override fun addFriend(friend: Friend, result: MutableLiveData<Boolean>) {
-        remoteDataRepository.getUser(friend.friendEmail).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                if (task.result?.isEmpty == false) {
-                    friend.friendName = task.result!!.documents[0]["name"] as String
-                    friend.friendPhone = task.result!!.documents[0]["phone"] as String
-                    localDataRepository.addFriend(friend)
-                    remoteDataRepository.addFriend(friend)
-                    result.postValue(true)
-                }
-            }
-        }
+    override fun initUserData() {
+        localDataRepository.deleteAllUsers()
+            .doOnComplete {
+                remoteDataRepository.getAllUsers()
+                    .addOnSuccessListener {
+                        for (document: DocumentSnapshot in it.documents) {
+                            val user = (document.data as Map<String, Object>).toUser()
+                            localDataRepository.addUser(user).subscribe()
+                        }
+                        Log.d("heec.choi", "initUserData Finished")
+                    }
+            }.subscribe()
     }
+
+    override fun addFriend(friend: Friend) = localDataRepository.addFriend(friend)
 
     override fun getFriend(email: String, result: MutableLiveData<Friend>) =
         localDataRepository.getFriend(email, result)
@@ -61,15 +66,15 @@ class UserDataRepositoryImpl(
         }
     }
 
-    override fun getUser(email: String, result: MutableLiveData<User>) =
-        localDataRepository.getUser(email, result)
+    override fun getUser(email: String): Maybe<User> = localDataRepository.getUser(email)
 
-    override fun getUsers() {
-        localDataRepository.getUsers()
+
+    override fun getAllUsers() {
+        localDataRepository.getAllUsers()
     }
 
-    override fun deleteUsers() {
-        localDataRepository.deleteUsers()
+    override fun deleteAllUsers() {
+        localDataRepository.deleteAllUsers()
     }
 
     override fun deleteAllFriends() {

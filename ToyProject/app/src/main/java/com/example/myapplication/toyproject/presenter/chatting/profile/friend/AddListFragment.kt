@@ -1,6 +1,7 @@
 package com.example.myapplication.toyproject.presenter.chatting.profile.friend
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,6 +37,8 @@ class AddListFragment : BaseFragment() {
             vm = ViewModelProvider(this@AddListFragment, ViewModelFactory(userRepository)).get(
                 AddListViewModel::class.java
             )
+            button.setOnClickListener {
+                binding.vm?.addFriend(binding.findFriendEmail.text.toString()) }
         }
         observeViewModel()
     }

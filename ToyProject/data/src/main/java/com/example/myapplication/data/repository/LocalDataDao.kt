@@ -3,8 +3,7 @@ package com.example.myapplication.data.repository
 import androidx.room.*
 import com.example.myapplication.data.model.Friend
 import com.example.myapplication.data.model.User
-import io.reactivex.rxjava3.core.Completable
-import io.reactivex.rxjava3.core.Flowable
+import io.reactivex.rxjava3.core.*
 
 /*
 * Flowable : Back pressure 대응을 위한 기술.
@@ -30,10 +29,10 @@ interface LocalDataDao {
     fun addUser(user: User): Completable
 
     @Query("SELECT * FROM users WHERE email= :email")
-    fun getUser(email: String): Flowable<User>
+    fun getUser(email: String): Maybe<User>
 
     @Query("SELECT * FROM users")
-    fun getUsers(): Flowable<List<User>>
+    fun getAllUsers(): Flowable<List<User>>
 
     @Query("DELETE FROM users")
     fun deleteUsers(): Completable

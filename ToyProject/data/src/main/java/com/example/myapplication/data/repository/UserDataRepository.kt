@@ -3,13 +3,15 @@ package com.example.myapplication.data.repository
 import androidx.lifecycle.MutableLiveData
 import com.example.myapplication.data.model.Friend
 import com.example.myapplication.data.model.User
-import io.reactivex.rxjava3.core.Flowable
+import io.reactivex.rxjava3.core.*
 
 interface UserDataRepository {
 
-    fun initData(email: String)
+    fun initFriendData(email: String)
 
-    fun addFriend(friend: Friend, result: MutableLiveData<Boolean>)
+    fun initUserData()
+
+    fun addFriend(friend: Friend): Completable
 
     fun getFriend(email: String, result: MutableLiveData<Friend>)
 
@@ -17,11 +19,11 @@ interface UserDataRepository {
 
     fun addUser(user: User)
 
-    fun getUser(email: String, result: MutableLiveData<User>)
+    fun getUser(email: String): Maybe<User>
 
-    fun getUsers()
+    fun getAllUsers()
 
-    fun deleteUsers()
+    fun deleteAllUsers()
 
     fun deleteAllFriends()
 

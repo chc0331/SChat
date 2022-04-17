@@ -11,6 +11,7 @@ import com.example.myapplication.data.repository.LocalDataRepository
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Flowable
+import io.reactivex.rxjava3.core.Maybe
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 class LocalDataRepositoryImpl(context: Context?) : LocalDataRepository {
@@ -20,13 +21,10 @@ class LocalDataRepositoryImpl(context: Context?) : LocalDataRepository {
     }!!
 
 
-    override fun addFriend(friend: Friend) {
-        localDao?.addFriend(friend)
-            ?.subscribeOn(Schedulers.io())
-            ?.observeOn(AndroidSchedulers.mainThread())
-            ?.subscribe {
-                Log.d("heec.choi", "(local)addFriends finished")
-            }
+    override fun addFriend(friend: Friend): Completable {
+        return localDao?.addFriend(friend)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
     }
 
     override fun getFriend(email: String, friends: MutableLiveData<Friend>) {
@@ -44,45 +42,31 @@ class LocalDataRepositoryImpl(context: Context?) : LocalDataRepository {
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    override fun addUser(user: User) {
+    override fun addUser(user: User): Completable =
         localDao?.addUser(user)
-            ?.subscribeOn(Schedulers.io())
-            ?.observeOn(AndroidSchedulers.mainThread())
-            ?.subscribe {
-                Log.d("heec.choi", "(local)addUser Complete")
-            }
-    }
-
-    override fun getUser(email: String, user: MutableLiveData<User>) {
-        localDao?.getUser(email)
-            ?.subscribeOn(Schedulers.io())
-            ?.observeOn(AndroidSchedulers.mainThread())
-            ?.subscribe { it ->
-                user.postValue(it)
-                Log.d("heec.choi", "(local)getUser Complete")
-            }
-    }
-
-    override fun getUsers() {
-        localDao?.getUsers().subscribeOn(Schedulers.io())
+            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                Log.d("heec.choi", "(local)getUsers : $it")
-            }
+
+
+    override fun getUser(email: String): Maybe<User> {
+        return localDao?.getUser(email).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
     }
+
+    override fun getAllUsers(): Flowable<List<User>> =
+        localDao?.getAllUsers().subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+
 
     override fun deleteAllFriends(): Completable {
         return localDao?.deleteAllFriends().subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    override fun deleteUsers() {
+    override fun deleteAllUsers(): Completable =
         localDao?.deleteUsers().subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                Log.d("heec.choi", "(local)deleteUsers")
-            }
-    }
+
 
     override fun updateFriend(friend: Friend) {
         localDao?.updateFriend(friend).subscribeOn(Schedulers.io())

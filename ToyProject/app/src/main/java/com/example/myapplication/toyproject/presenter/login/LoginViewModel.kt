@@ -10,15 +10,19 @@ class LoginViewModel(private val userDataRepository: UserDataRepository) : FireB
     val loginSuccess: LiveData<Boolean>
         get() = _loginSuccess
 
-
     fun login(email: String, password: String) {
         if (email.isNotEmpty() && password.isNotEmpty()) {
             auth?.signInWithEmailAndPassword(email, password)
                 ?.addOnCompleteListener { task ->
                     _loginSuccess.postValue(task.isSuccessful)
-                    userDataRepository.initData(email)
+                    userDataRepository.initFriendData(email)
                 }
         } else
             _loginSuccess.postValue(false)
     }
+
+    fun initUsers(){
+        userDataRepository.initUserData()
+    }
+
 }
