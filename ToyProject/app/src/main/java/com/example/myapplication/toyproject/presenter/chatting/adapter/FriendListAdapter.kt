@@ -38,6 +38,8 @@ class FriendListAdapter :
                 this.root.setOnClickListener {
                     goToUserProfileFragment(it, ParcelableFriend.friendToParcelable(friend))
                 }
+                //바인딩 즉시 실행
+                this.executePendingBindings()
             }
         }
     }
