@@ -3,6 +3,7 @@
 <layout>
 
     <data>
+
         <variable
             name="friend"
             type="com.example.myapplication.data.model.Friend" />

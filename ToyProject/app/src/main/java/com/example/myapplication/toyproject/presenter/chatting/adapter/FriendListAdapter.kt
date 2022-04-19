@@ -3,6 +3,7 @@ package com.example.myapplication.toyproject.presenter.chatting.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -35,8 +36,11 @@ class FriendListAdapter :
         fun bind(friend: Friend) {
             with(binding) {
                 this.friend = friend
-                this.root.setOnClickListener {
+                this.friendImage.setOnClickListener {
                     goToUserProfileFragment(it, ParcelableFriend.friendToParcelable(friend))
+                }
+                this.root.setOnClickListener {
+                    goToMessengerFragment(it)
                 }
                 //바인딩 즉시 실행
                 this.executePendingBindings()
@@ -46,6 +50,11 @@ class FriendListAdapter :
 
     private fun goToUserProfileFragment(view: View, friend: ParcelableFriend) {
         val action = FriendListFragmentDirections.actionGoToUserProfile(friend)
+        Navigation.findNavController(view).navigate(action)
+    }
+
+    private fun goToMessengerFragment(view: View) {
+        val action = FriendListFragmentDirections.actionGoToMessengerFragment()
         Navigation.findNavController(view).navigate(action)
     }
 }

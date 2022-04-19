@@ -21,6 +21,9 @@
             app:destination="@id/friendListFragment"
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_loginFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
     </fragment>
 
     <fragment
@@ -47,6 +50,9 @@
         <action
             android:id="@+id/actionGoToSettingFragment"
             app:destination="@id/settingFragment" />
+        <action
+            android:id="@+id/actionGoToMessengerFragment"
+            app:destination="@id/messengerFragment" />
     </fragment>
     <fragment
         android:id="@+id/addListFragment"
@@ -87,4 +93,8 @@
             app:popUpTo="@id/friendListFragment"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/messengerFragment"
+        android:name="com.example.myapplication.toyproject.presenter.chatting.messenger.MessengerFragment"
+        android:label="MessengerFragment" />
 </navigation>

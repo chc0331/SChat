@@ -37,8 +37,7 @@ class AddListFragment : BaseFragment() {
             vm = ViewModelProvider(this@AddListFragment, ViewModelFactory(userRepository)).get(
                 AddListViewModel::class.java
             )
-            button.setOnClickListener {
-                binding.vm?.addFriend(binding.findFriendEmail.text.toString()) }
+            button.setOnClickListener { binding.vm?.addFriend(binding.findFriendEmail.text.toString()) }
         }
         observeViewModel()
     }
