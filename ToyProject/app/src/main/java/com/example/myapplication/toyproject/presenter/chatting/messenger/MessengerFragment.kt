@@ -5,8 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.example.myapplication.toyproject.R
 import com.example.myapplication.toyproject.databinding.FragmentMessengerBinding
 
@@ -25,11 +28,27 @@ class MessengerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+        val rootActivity = activity as AppCompatActivity
+        val navController = findNavController()
+        rootActivity?.setSupportActionBar(binding.toolbar)
+        NavigationUI.setupActionBarWithNavController(rootActivity, navController)
+        binding.toolbar.apply {
+            setNavigationOnClickListener { navController.navigateUp() }
+            title = ""
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setSoftKeyboardMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
     }
 
     override fun onStop() {
         super.onStop()
-        activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING)
+        setSoftKeyboardMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING)
+    }
+
+    private fun setSoftKeyboardMode(mode: Int) {
+        activity?.window?.setSoftInputMode(mode)
     }
 }
