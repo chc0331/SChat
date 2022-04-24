@@ -33,11 +33,12 @@ class SignUpViewModel(private val repository: UserDataRepository) : FireBaseView
                 auth?.createUserWithEmailAndPassword(id, password)
                     ?.addOnCompleteListener { create_task ->
                         if (create_task.isSuccessful) {
-                            Firebase.auth.currentUser?.updateProfile(userProfileChangeRequest {
+                            val uuid = Firebase.auth.currentUser!!.uid
+                            Firebase.auth.currentUser!!.updateProfile(userProfileChangeRequest {
                                 displayName = name
-                            })?.addOnCompleteListener { update_task ->
+                            })!!.addOnCompleteListener { update_task ->
                                 if (update_task.isSuccessful) {
-                                    repository.addUser(User(name, phone, id, password))
+                                    repository.addUser(User(uuid, name, phone, id, password))
                                     _movePage.postValue(true)
                                 }
                                 _resultToast.postValue(getMessage(create_task))

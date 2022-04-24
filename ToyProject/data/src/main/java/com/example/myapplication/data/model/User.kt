@@ -6,11 +6,13 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "users")
 data class User(
+    @PrimaryKey
+    @ColumnInfo(name = "uuid")
+    var uuid: String = "",
     @ColumnInfo(name = "name")
     var name: String = "",
     @ColumnInfo(name = "phone")
     var phone: String = "",
-    @PrimaryKey
     @ColumnInfo(name = "email")
     var email: String,
     @ColumnInfo(name = "password")
@@ -21,6 +23,7 @@ data class User(
 
     fun toMap(): HashMap<String, String> {
         return hashMapOf(
+            "uuid" to uuid,
             "name" to name,
             "phone" to phone,
             "id" to email,

@@ -8,7 +8,7 @@ import com.example.myapplication.data.model.Friend
 import com.example.myapplication.data.model.User
 import com.example.myapplication.data.repository.LocalDataDao
 
-@Database(entities = [User::class, Friend::class], version = 5)
+@Database(entities = [User::class, Friend::class], version = 6)
 abstract class LocalRoomDB : RoomDatabase() {
 
     abstract fun localDataDao(): LocalDataDao
