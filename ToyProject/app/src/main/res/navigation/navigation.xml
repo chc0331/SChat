@@ -92,9 +92,16 @@
             app:destination="@id/loginFragment"
             app:popUpTo="@id/friendListFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/actionGoToOwnerProfileFragment"
+            app:destination="@id/ownerProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/messengerFragment"
         android:name="com.example.myapplication.toyproject.presenter.chatting.messenger.MessengerFragment"
         android:label="MessengerFragment" />
+    <fragment
+        android:id="@+id/ownerProfileFragment"
+        android:name="com.example.myapplication.toyproject.presenter.chatting.profile.owner.OwnerProfileFragment"
+        android:label="OwnerProfileFragment" />
 </navigation>

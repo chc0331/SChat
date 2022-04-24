@@ -14,7 +14,9 @@ data class User(
     @ColumnInfo(name = "email")
     var email: String,
     @ColumnInfo(name = "password")
-    var password: String = ""
+    var password: String = "",
+    @ColumnInfo(name = "image")
+    var image: String = ""
 ) {
 
     fun toMap(): HashMap<String, String> {
@@ -22,7 +24,8 @@ data class User(
             "name" to name,
             "phone" to phone,
             "id" to email,
-            "password" to password
+            "password" to password,
+            "image" to image
         )
     }
 }

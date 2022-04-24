@@ -11,14 +11,20 @@ import com.google.firebase.ktx.Firebase
 
 class SettingFragment : PreferenceFragmentCompat() {
 
-    private var logoutPreference: Preference? = null
+    private val logoutPreference: Preference? by lazy {
+        preferenceScreen.findPreference("logout")
+    }
+    private val profileDataPreference: Preference? by lazy {
+        preferenceScreen.findPreference("profile")
+    }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.setting_preferences, rootKey)
-
-        logoutPreference = preferenceScreen.findPreference("logout")
         logoutPreference?.setOnPreferenceClickListener {
             signOut()
+        }
+        profileDataPreference?.setOnPreferenceClickListener {
+            goToOwnerProfile()
         }
     }
 
@@ -29,4 +35,11 @@ class SettingFragment : PreferenceFragmentCompat() {
         Toast.makeText(context, "로그아웃", Toast.LENGTH_SHORT).show()
         return true
     }
+
+    private fun goToOwnerProfile(): Boolean {
+        val action = SettingFragmentDirections.actionGoToOwnerProfileFragment()
+        findNavController().navigate(action)
+        return true
+    }
+
 }

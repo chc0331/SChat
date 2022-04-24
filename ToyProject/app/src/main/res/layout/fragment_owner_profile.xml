@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/profile_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/text_profile_name"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:hint="닉네임"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/edit_profile_name"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_toRightOf="@+id/text_profile_name"
+                android:hint="닉네임" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/phone_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profile_layout"
+            android:gravity="center_vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/text_profile_phone"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:hint="휴대 전화"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/edit_profile_phone"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_toRightOf="@+id/text_profile_name"
+                android:hint="휴대전화" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/password_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/phone_layout"
+            android:gravity="center_vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/text_password_phone"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:hint="비밀 번호"
+                android:textSize="20sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                app:passwordToggleEnabled="true">
+
+                <EditText
+                    android:id="@+id/edit_password_phone"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/text_profile_name"
+                    android:inputType="textPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/change_profile_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/password_layout"
+            android:layout_toLeftOf="@+id/change_profile_ok"
+            android:backgroundTint="@color/light_blue_3"
+            android:text="취소" />
+
+        <Button
+            android:id="@+id/change_profile_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/password_layout"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="8dp"
+            android:backgroundTint="@color/light_blue_3"
+            android:text="변경" />
+
+    </RelativeLayout>
+</layout>

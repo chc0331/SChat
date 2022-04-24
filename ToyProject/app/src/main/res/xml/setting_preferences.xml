@@ -7,6 +7,10 @@
         <Preference
             android:key="logout"
             android:title="로그아웃" />
+
+        <Preference
+            android:key="profile"
+            android:title="계정 데이터 변경" />
     </PreferenceCategory>
 
 </PreferenceScreen>
