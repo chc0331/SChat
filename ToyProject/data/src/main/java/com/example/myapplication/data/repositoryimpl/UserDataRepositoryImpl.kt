@@ -1,6 +1,5 @@
 package com.example.myapplication.data.repositoryimpl
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.myapplication.data.model.Friend
 import com.example.myapplication.data.model.User
@@ -44,7 +43,6 @@ class UserDataRepositoryImpl(
                             val user = (document.data as Map<String, Object>).toUser()
                             localDataRepository.addUser(user).subscribe()
                         }
-                        Log.d("heec.choi", "initUserData Finished")
                     }
             }.subscribe()
     }
