@@ -1,5 +1,6 @@
 package com.example.myapplication.data.repositoryimpl
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.myapplication.data.model.Friend
 import com.example.myapplication.data.model.User

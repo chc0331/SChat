@@ -16,8 +16,9 @@ fun MutableLiveData<String>.set(value: String): MutableLiveData<String> {
 }
 
 fun Map<String, Object>.toUser(): User = User(
-    this["name"].toString(), this["phone"].toString(),
-    this["id"].toString(), this["password"].toString()
+    this["uuid"].toString(), this["name"].toString(),
+    this["phone"].toString(), this["email"].toString(),
+    this["password"].toString(), this["image"].toString()
 )
 
 fun Map<String, Object>.toFriend(): Friend = Friend(

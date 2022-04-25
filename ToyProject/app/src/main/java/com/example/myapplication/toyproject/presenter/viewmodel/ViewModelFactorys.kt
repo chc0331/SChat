@@ -6,6 +6,7 @@ import com.example.myapplication.data.repository.UserDataRepository
 import com.example.myapplication.toyproject.presenter.chatting.FriendListViewModel
 import com.example.myapplication.toyproject.presenter.chatting.profile.friend.AddListViewModel
 import com.example.myapplication.toyproject.presenter.chatting.profile.friend.FriendProfileViewModel
+import com.example.myapplication.toyproject.presenter.chatting.profile.owner.OwnerProfileViewModel
 import com.example.myapplication.toyproject.presenter.login.LoginViewModel
 import com.example.myapplication.toyproject.presenter.login.signup.SignUpViewModel
 
@@ -23,6 +24,8 @@ class ViewModelFactory(private val repository: UserDataRepository) :
                 SignUpViewModel(repository) as T
             modelClass.isAssignableFrom(FriendProfileViewModel::class.java) ->
                 FriendProfileViewModel(repository) as T
+            modelClass.isAssignableFrom(OwnerProfileViewModel::class.java) ->
+                OwnerProfileViewModel(repository) as T
             else -> {
                 throw IllegalArgumentException()
             }
