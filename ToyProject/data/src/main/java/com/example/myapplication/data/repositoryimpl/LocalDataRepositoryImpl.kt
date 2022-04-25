@@ -47,11 +47,14 @@ class LocalDataRepositoryImpl(context: Context?) : LocalDataRepository {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 
-
-    override fun getUser(email: String): Maybe<User> {
-        return localDao?.getUser(email).subscribeOn(Schedulers.io())
+    override fun getUserByUuid(uuid: String): Maybe<User> =
+        localDao?.getUserByUuid(uuid).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-    }
+
+    override fun getUserByEmail(email: String): Maybe<User> =
+        localDao?.getUserByEmail(email).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+
 
     override fun getAllUsers(): Flowable<List<User>> =
         localDao?.getAllUsers().subscribeOn(Schedulers.io())

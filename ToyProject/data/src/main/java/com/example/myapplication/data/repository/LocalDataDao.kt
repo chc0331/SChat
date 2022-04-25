@@ -3,7 +3,9 @@ package com.example.myapplication.data.repository
 import androidx.room.*
 import com.example.myapplication.data.model.Friend
 import com.example.myapplication.data.model.User
-import io.reactivex.rxjava3.core.*
+import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.core.Flowable
+import io.reactivex.rxjava3.core.Maybe
 
 /*
 * Flowable : Back pressure 대응을 위한 기술.
@@ -28,8 +30,11 @@ interface LocalDataDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addUser(user: User): Completable
 
+    @Query("SELECT * FROM users WHERE uuid= :uuid")
+    fun getUserByUuid(uuid: String): Maybe<User>
+
     @Query("SELECT * FROM users WHERE email= :email")
-    fun getUser(email: String): Maybe<User>
+    fun getUserByEmail(email: String): Maybe<User>
 
     @Query("SELECT * FROM users")
     fun getAllUsers(): Flowable<List<User>>

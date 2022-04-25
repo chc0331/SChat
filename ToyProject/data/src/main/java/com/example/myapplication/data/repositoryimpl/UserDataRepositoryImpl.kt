@@ -64,7 +64,10 @@ class UserDataRepositoryImpl(
         }
     }
 
-    override fun getUser(email: String): Maybe<User> = localDataRepository.getUser(email)
+    override fun getUserByUuid(uuid: String): Maybe<User> = localDataRepository.getUserByUuid(uuid)
+
+    override fun getUserByEmail(email: String): Maybe<User> =
+        localDataRepository.getUserByEmail(email)
 
 
     override fun getAllUsers() {

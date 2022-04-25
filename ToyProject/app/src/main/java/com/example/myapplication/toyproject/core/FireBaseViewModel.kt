@@ -15,4 +15,6 @@ abstract class FireBaseViewModel : ViewModel() {
     fun getUserEmail(): String {
         return auth.currentUser?.email ?: "nothing"
     }
+
+    fun getUserUUID(): String = auth.currentUser!!.uid
 }

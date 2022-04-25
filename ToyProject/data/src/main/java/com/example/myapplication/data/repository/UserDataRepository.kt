@@ -19,7 +19,9 @@ interface UserDataRepository {
 
     fun addUser(user: User)
 
-    fun getUser(email: String): Maybe<User>
+    fun getUserByUuid(uuid: String): Maybe<User>
+
+    fun getUserByEmail(email: String): Maybe<User>
 
     fun getAllUsers()
 

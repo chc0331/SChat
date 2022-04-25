@@ -16,7 +16,9 @@ interface RemoteDataRepository {
 
     fun addUser(user: User): Task<DocumentReference>
 
-    fun getUser(email: String): Task<QuerySnapshot>
+    fun getUserByUuid(uuid: String): Task<QuerySnapshot>
+
+    fun getUserByEmail(email: String): Task<QuerySnapshot>
 
     fun getAllUsers(): Task<QuerySnapshot>
 

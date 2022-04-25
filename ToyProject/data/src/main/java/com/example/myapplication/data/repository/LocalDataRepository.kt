@@ -15,7 +15,9 @@ interface LocalDataRepository {
 
     fun addUser(user: User): Completable
 
-    fun getUser(email: String): Maybe<User>
+    fun getUserByUuid(uuid: String): Maybe<User>
+
+    fun getUserByEmail(email: String): Maybe<User>
 
     fun getAllUsers(): Flowable<List<User>>
 

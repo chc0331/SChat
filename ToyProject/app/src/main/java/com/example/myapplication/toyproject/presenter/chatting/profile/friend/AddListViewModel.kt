@@ -22,7 +22,7 @@ class AddListViewModel(private val repository: UserDataRepository) : FireBaseVie
         if (currentUser == null) return
 
         //find friend
-        repository.getUser(email)
+        repository.getUserByEmail(email)
             .doOnError { Log.e("heec.choi", "onError") }
             .doOnComplete {
                 _success.postValue(false)

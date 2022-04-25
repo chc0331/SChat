@@ -41,9 +41,15 @@ class RemoteDataRepositoryImpl : RemoteDataRepository {
             .add(user.toMap())
     }
 
-    override fun getUser(email: String): Task<QuerySnapshot> {
+    override fun getUserByUuid(uuid: String): Task<QuerySnapshot> {
         return fireStore.collection("Users")
-            .whereEqualTo("id", email)
+            .whereEqualTo("uuid", uuid)
+            .get()
+    }
+
+    override fun getUserByEmail(email: String): Task<QuerySnapshot> {
+        return fireStore.collection("Users")
+            .whereEqualTo("email", email)
             .get()
     }
 
@@ -55,6 +61,4 @@ class RemoteDataRepositoryImpl : RemoteDataRepository {
             .document(friend.friendEmail)
             .set(friend.toMap())
     }
-
-
 }
