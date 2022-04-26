@@ -36,9 +36,9 @@ class RemoteDataRepositoryImpl : RemoteDataRepository {
             .get()
     }
 
-    override fun addUser(user: User): Task<DocumentReference> {
+    override fun addUser(user: User): Task<Void> {
         return fireStore.collection("Users")
-            .add(user.toMap())
+            .document(user.uuid).set(user)
     }
 
     override fun getUserByUuid(uuid: String): Task<QuerySnapshot> {
@@ -53,6 +53,9 @@ class RemoteDataRepositoryImpl : RemoteDataRepository {
             .get()
     }
 
+    override fun updateUser(user: User): Task<Void> {
+        return fireStore.collection("Users").document(user.uuid).set(user)
+    }
 
     override fun updateFriend(friend: Friend): Task<Void> {
         return fireStore.collection("Friends")

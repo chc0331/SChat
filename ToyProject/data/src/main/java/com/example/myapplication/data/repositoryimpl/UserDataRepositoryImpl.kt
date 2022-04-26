@@ -1,6 +1,5 @@
 package com.example.myapplication.data.repositoryimpl
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.myapplication.data.model.Friend
 import com.example.myapplication.data.model.User
@@ -81,6 +80,11 @@ class UserDataRepositoryImpl(
 
     override fun deleteAllFriends() {
         localDataRepository.deleteAllFriends()
+    }
+
+    override fun updateUser(user: User) {
+        remoteDataRepository.updateUser(user)
+        localDataRepository.updateUser(user)
     }
 
     override fun updateFriend(friend: Friend) {

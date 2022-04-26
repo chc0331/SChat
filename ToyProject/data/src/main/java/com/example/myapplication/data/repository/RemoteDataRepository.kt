@@ -14,7 +14,7 @@ interface RemoteDataRepository {
 
     fun getFriend(email: String): Task<QuerySnapshot>
 
-    fun addUser(user: User): Task<DocumentReference>
+    fun addUser(user: User): Task<Void>
 
     fun getUserByUuid(uuid: String): Task<QuerySnapshot>
 
@@ -23,6 +23,8 @@ interface RemoteDataRepository {
     fun getAllUsers(): Task<QuerySnapshot>
 
     fun getAllFriends(): Task<QuerySnapshot>
+
+    fun updateUser(user: User): Task<Void>
 
     fun updateFriend(friend: Friend): Task<Void>
 }

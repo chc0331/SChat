@@ -29,5 +29,7 @@ interface UserDataRepository {
 
     fun deleteAllFriends()
 
+    fun updateUser(user: User)
+
     fun updateFriend(friend: Friend)
 }

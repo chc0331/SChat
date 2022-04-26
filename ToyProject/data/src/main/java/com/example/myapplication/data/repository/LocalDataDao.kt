@@ -46,5 +46,8 @@ interface LocalDataDao {
     fun deleteAllFriends(): Completable
 
     @Update
+    fun updateUser(user: User): Completable
+
+    @Update
     fun updateFriend(friend: Friend): Completable
 }

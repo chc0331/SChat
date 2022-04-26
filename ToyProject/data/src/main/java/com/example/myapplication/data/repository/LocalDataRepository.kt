@@ -25,6 +25,8 @@ interface LocalDataRepository {
 
     fun deleteAllFriends(): Completable
 
+    fun updateUser(user: User)
+
     fun updateFriend(friend: Friend)
 
 }

@@ -1,7 +1,9 @@
 package com.example.myapplication.toyproject.presenter.chatting.profile.owner
 
+import android.content.Context
 import android.net.Uri
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.myapplication.data.model.User
@@ -30,11 +32,19 @@ class OwnerProfileViewModel(private val repository: UserDataRepository) : FireBa
         }.subscribe()
     }
 
-    fun changeUserProfile(name: String, phone: String, password: String) {
-        Log.d(
-            "heec.choi",
-            "imageUri : $imageUri, name : $name, phone : $phone, password : $password"
-        )
+    fun changeUserProfile(context: Context, name: String, phone: String, password: String) {
+        if (name.isNotEmpty() && phone.isNotEmpty()
+            && password.isNotEmpty() && password.length >= 6
+        ) {
+            val user = _user.value
+            user!!.also {
+                it.name = name
+                it.phone = phone
+                it.password = password
+            }
+            repository.updateUser(user)
+            Toast.makeText(context, "Profile Update", Toast.LENGTH_SHORT).show()
+        }
     }
 
     fun updateImageDatabase(uri: Uri?) {

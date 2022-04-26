@@ -61,6 +61,7 @@ class OwnerProfileFragment : BaseFragment() {
         }
         binding.changeProfileOk.setOnClickListener {
             vm?.changeUserProfile(
+                context!!,
                 binding.editProfileName.text.toString(),
                 binding.editProfilePhone.text.toString(),
                 binding.editProfilePassword.text.toString()

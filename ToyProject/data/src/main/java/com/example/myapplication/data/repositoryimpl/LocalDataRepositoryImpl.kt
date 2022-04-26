@@ -70,6 +70,14 @@ class LocalDataRepositoryImpl(context: Context?) : LocalDataRepository {
         localDao?.deleteUsers().subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 
+    override fun updateUser(user: User) {
+        localDao?.updateUser(user).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                Log.d("heec.choi", "(local)updateUser")
+            }
+    }
+
 
     override fun updateFriend(friend: Friend) {
         localDao?.updateFriend(friend).subscribeOn(Schedulers.io())
