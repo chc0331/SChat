@@ -23,7 +23,7 @@ interface UserDataRepository {
 
     fun getUserByEmail(email: String): Maybe<User>
 
-    fun getAllUsers()
+    fun getAllUsers(): Flowable<List<User>>
 
     fun deleteAllUsers()
 

@@ -19,7 +19,7 @@ class OwnerProfileViewModel(private val repository: UserDataRepository) : FireBa
     private var _user: MutableLiveData<User> = MutableLiveData()
     val user: LiveData<User>
         get() = _user
-    var imageUri: String = ""
+    var imageUri: Uri? = null
 
     fun updateUserProfile() {
         repository.getUserByUuid(getUserUUID()).doOnError {
@@ -37,25 +37,35 @@ class OwnerProfileViewModel(private val repository: UserDataRepository) : FireBa
             && password.isNotEmpty() && password.length >= 6
         ) {
             val user = _user.value
-            user!!.also {
-                it.name = name
-                it.phone = phone
-                it.password = password
+            if (imageUri == null) {
+                user!!.also {
+                    it.name = name
+                    it.phone = phone
+                    it.password = password
+                }
+                repository.updateUser(user)
+            } else {
+                user!!.also {
+                    it.name = name
+                    it.phone = phone
+                    it.password = password
+                }
+                updateImageDatabase(imageUri!!, user)
             }
-            repository.updateUser(user)
             Toast.makeText(context, "Profile Update", Toast.LENGTH_SHORT).show()
         }
     }
 
-    fun updateImageDatabase(uri: Uri?) {
-        uri?.apply {
+    private fun updateImageDatabase(uri: Uri, user: User) {
+        uri.apply {
             val fileName = SimpleDateFormat("yyyyMMddHHmmss").format(Date())
             storage.reference.child("image").child(fileName)
                 .putFile(uri)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        val downloadUrl = task.result
-                        val url = downloadUrl.toString()
+                .addOnSuccessListener { task ->
+                    task.metadata?.reference?.downloadUrl?.addOnSuccessListener {
+                        val url = it.toString()
+                        user.image = url
+                        repository.updateUser(user)
                     }
                 }
         }

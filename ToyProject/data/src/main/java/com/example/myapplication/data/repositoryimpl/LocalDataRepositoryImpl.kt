@@ -78,7 +78,6 @@ class LocalDataRepositoryImpl(context: Context?) : LocalDataRepository {
             }
     }
 
-
     override fun updateFriend(friend: Friend) {
         localDao?.updateFriend(friend).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

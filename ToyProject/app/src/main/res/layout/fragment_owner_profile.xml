@@ -11,8 +11,7 @@
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/ic_profile_icon" />
+            android:layout_marginTop="20dp" />
 
         <View
             android:id="@+id/divider"

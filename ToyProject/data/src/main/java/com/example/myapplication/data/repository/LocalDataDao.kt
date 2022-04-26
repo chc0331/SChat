@@ -21,7 +21,7 @@ interface LocalDataDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addFriend(friend: Friend): Completable
 
-    @Query("SELECT * FROM friends WHERE friend_email = :email")
+    @Query("SELECT * FROM friends WHERE friend_email=:email")
     fun getFriend(email: String): Flowable<Friend>
 
     @Query("SELECT * FROM friends")
@@ -30,10 +30,10 @@ interface LocalDataDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addUser(user: User): Completable
 
-    @Query("SELECT * FROM users WHERE uuid= :uuid")
+    @Query("SELECT * FROM users WHERE uuid=:uuid")
     fun getUserByUuid(uuid: String): Maybe<User>
 
-    @Query("SELECT * FROM users WHERE email= :email")
+    @Query("SELECT * FROM users WHERE email=:email")
     fun getUserByEmail(email: String): Maybe<User>
 
     @Query("SELECT * FROM users")

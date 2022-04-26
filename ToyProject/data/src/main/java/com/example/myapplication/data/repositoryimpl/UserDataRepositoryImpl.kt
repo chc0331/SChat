@@ -70,8 +70,8 @@ class UserDataRepositoryImpl(
         localDataRepository.getUserByEmail(email)
 
 
-    override fun getAllUsers() {
-        localDataRepository.getAllUsers()
+    override fun getAllUsers(): Flowable<List<User>> {
+        return localDataRepository.getAllUsers()
     }
 
     override fun deleteAllUsers() {
