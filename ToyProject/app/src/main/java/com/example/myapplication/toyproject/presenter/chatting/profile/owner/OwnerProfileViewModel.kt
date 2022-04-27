@@ -2,12 +2,12 @@ package com.example.myapplication.toyproject.presenter.chatting.profile.owner
 
 import android.content.Context
 import android.net.Uri
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.myapplication.data.model.User
 import com.example.myapplication.data.repository.UserDataRepository
+import com.example.myapplication.data.toUser
 import com.example.myapplication.toyproject.core.FireBaseViewModel
 import com.google.firebase.storage.FirebaseStorage
 import java.text.SimpleDateFormat
@@ -22,14 +22,11 @@ class OwnerProfileViewModel(private val repository: UserDataRepository) : FireBa
     var imageUri: Uri? = null
 
     fun updateUserProfile() {
-        repository.getUserByUuid(getUserUUID()).doOnError {
-            Log.d(TAG, "getUserByUUID onError")
-        }.doOnComplete {
-            Log.d(TAG, "getUserByUUID onComplete")
-        }.doOnSuccess {
-            _user.postValue(it)
-            Log.d(TAG, "getUserByUUID onSuccess")
-        }.subscribe()
+        repository.getUserByUuid(getUserUUID()).addOnSuccessListener {
+            val map = it.data as Map<String, Object>
+            val user = map.toUser()
+            _user.postValue(user)
+        }
     }
 
     fun changeUserProfile(context: Context, name: String, phone: String, password: String) {

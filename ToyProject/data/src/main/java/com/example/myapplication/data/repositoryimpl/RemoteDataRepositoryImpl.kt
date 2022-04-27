@@ -4,7 +4,7 @@ import com.example.myapplication.data.model.Friend
 import com.example.myapplication.data.model.User
 import com.example.myapplication.data.repository.RemoteDataRepository
 import com.google.android.gms.tasks.Task
-import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 
@@ -41,10 +41,9 @@ class RemoteDataRepositoryImpl : RemoteDataRepository {
             .document(user.uuid).set(user)
     }
 
-    override fun getUserByUuid(uuid: String): Task<QuerySnapshot> {
+    override fun getUserByUuid(uuid: String): Task<DocumentSnapshot> {
         return fireStore.collection("Users")
-            .whereEqualTo("uuid", uuid)
-            .get()
+            .document(uuid).get()
     }
 
     override fun getUserByEmail(email: String): Task<QuerySnapshot> {

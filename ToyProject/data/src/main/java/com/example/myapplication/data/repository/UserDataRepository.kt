@@ -3,6 +3,8 @@ package com.example.myapplication.data.repository
 import androidx.lifecycle.MutableLiveData
 import com.example.myapplication.data.model.Friend
 import com.example.myapplication.data.model.User
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.DocumentSnapshot
 import io.reactivex.rxjava3.core.*
 
 interface UserDataRepository {
@@ -19,7 +21,7 @@ interface UserDataRepository {
 
     fun addUser(user: User)
 
-    fun getUserByUuid(uuid: String): Maybe<User>
+    fun getUserByUuid(uuid: String): Task<DocumentSnapshot>
 
     fun getUserByEmail(email: String): Maybe<User>
 

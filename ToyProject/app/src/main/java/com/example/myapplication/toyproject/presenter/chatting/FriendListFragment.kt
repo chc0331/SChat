@@ -1,7 +1,6 @@
 package com.example.myapplication.toyproject.presenter.chatting
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -15,6 +14,7 @@ import com.example.myapplication.data.repository.UserDataRepository
 import com.example.myapplication.data.repositoryimpl.LocalDataRepositoryImpl
 import com.example.myapplication.data.repositoryimpl.RemoteDataRepositoryImpl
 import com.example.myapplication.data.repositoryimpl.UserDataRepositoryImpl
+import com.example.myapplication.data.toUser
 import com.example.myapplication.toyproject.R
 import com.example.myapplication.toyproject.core.BaseFragment
 import com.example.myapplication.toyproject.databinding.FragmentFriendListBinding
@@ -34,7 +34,6 @@ class FriendListFragment : BaseFragment() {
             RemoteDataRepositoryImpl()
         )
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,34 +64,22 @@ class FriendListFragment : BaseFragment() {
         observeViewModel()
     }
 
+    //todo : need to know why select is not working
+    //initUser가 끝이나지 않은 상태에서 get을 해와서 그런듯
     override fun onResume() {
         super.onResume()
         binding.vm?.getFriends()
         binding.userName.text = Firebase.auth.getCurrentUserName()
-
-        repository.getAllUsers().subscribe { it ->
-            Log.d("heec.choi", it.toString())
+        repository.getUserByUuid(Firebase.auth.uid!!).addOnSuccessListener {
+            val map = it.data as Map<String, Object>
+            val user = map.toUser()
+            binding.apply {
+                userName.text = user.name
+                Glide.with(activity!!).load(user.image)
+                    .placeholder(R.drawable.ic_profile_icon)
+                    .into(userProfileImage)
+            }
         }
-
-        //todo : need to know why select is not working
-//        Log.d("heec.choi", Firebase.auth.uid + " ")
-//        repository.getUserByUuid(Firebase.auth.uid!!)
-//            .doOnComplete {
-//                Log.d("heec.choi", "onComplete")
-//            }
-//            .doOnSuccess {
-//                Log.d("heec.choi", "onSuccess")
-//                Glide.with(activity!!).load(it.image)
-//                    .into(binding.userProfileImage)
-//            }.subscribe()
-
-        repository.getUserByEmail("ss01003@naver.com")
-            .doOnComplete {
-                Log.d("heec.choi", "email onComplete")
-            }.doOnSuccess {
-                Log.d("heec.choi", "email : " + it.toString())
-            }.subscribe()
-
 
     }
 

@@ -8,6 +8,7 @@ import com.example.myapplication.data.repository.RemoteDataRepository
 import com.example.myapplication.data.repository.UserDataRepository
 import com.example.myapplication.data.toFriend
 import com.example.myapplication.data.toUser
+import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.QueryDocumentSnapshot
 import io.reactivex.rxjava3.core.Flowable
@@ -64,7 +65,8 @@ class UserDataRepositoryImpl(
         }
     }
 
-    override fun getUserByUuid(uuid: String): Maybe<User> = localDataRepository.getUserByUuid(uuid)
+    override fun getUserByUuid(uuid: String): Task<DocumentSnapshot> =
+        remoteDataRepository.getUserByUuid(uuid)
 
     override fun getUserByEmail(email: String): Maybe<User> =
         localDataRepository.getUserByEmail(email)

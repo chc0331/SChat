@@ -3,7 +3,7 @@ package com.example.myapplication.data.repository
 import com.example.myapplication.data.model.Friend
 import com.example.myapplication.data.model.User
 import com.google.android.gms.tasks.Task
-import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 
@@ -16,7 +16,7 @@ interface RemoteDataRepository {
 
     fun addUser(user: User): Task<Void>
 
-    fun getUserByUuid(uuid: String): Task<QuerySnapshot>
+    fun getUserByUuid(uuid: String): Task<DocumentSnapshot>
 
     fun getUserByEmail(email: String): Task<QuerySnapshot>
 
