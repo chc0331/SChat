@@ -18,15 +18,42 @@
             app:layout_constraintTop_toTopOf="parent"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-        <EditText
-            android:id="@+id/editTextTextPersonName"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:background="@color/white"
-            android:ems="10"
-            android:inputType="textPersonName"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/attach_file"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/ic_add" />
+
+            <EditText
+                android:id="@+id/chat_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:layout_toLeftOf="@id/send_text"
+                android:layout_toRightOf="@id/attach_file"
+                android:background="@color/white_gray"
+                android:ems="10"
+                android:hint="Write message here"
+                android:inputType="textPersonName" />
+
+            <ImageView
+                android:id="@+id/send_text"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/ic_enter_chat" />
+
+        </RelativeLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

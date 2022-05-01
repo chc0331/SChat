@@ -8,6 +8,7 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.myapplication.toyproject.R
@@ -16,6 +17,7 @@ import com.example.myapplication.toyproject.databinding.FragmentMessengerBinding
 class MessengerFragment : Fragment() {
 
     private lateinit var binding: FragmentMessengerBinding
+    private val vm: MessengerViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,6 +37,10 @@ class MessengerFragment : Fragment() {
         binding.toolbar.apply {
             setNavigationOnClickListener { navController.navigateUp() }
             title = ""
+        }
+        binding.sendText.setOnClickListener {
+            val text = binding.chatEditText.text.toString()
+
         }
     }
 

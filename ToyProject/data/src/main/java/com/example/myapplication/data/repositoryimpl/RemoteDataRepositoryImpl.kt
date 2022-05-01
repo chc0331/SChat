@@ -24,14 +24,14 @@ class RemoteDataRepositoryImpl : RemoteDataRepository {
     }
 
     override fun addFriend(friend: Friend): Task<Void> {
-        return fireStore.collection("Friends").document(friend.ownerEmail)
-            .collection("friends").document(friend.friendEmail)
+        return fireStore.collection("Friends").document(friend.ownerUuid)
+            .collection("friends").document(friend.friendUuid)
             .set(friend.toMap())
     }
 
-    override fun getFriend(email: String): Task<QuerySnapshot> {
+    override fun getFriend(uuid: String): Task<QuerySnapshot> {
         return fireStore.collection("Friends")
-            .document(email)
+            .document(uuid)
             .collection("friends")
             .get()
     }
@@ -58,9 +58,9 @@ class RemoteDataRepositoryImpl : RemoteDataRepository {
 
     override fun updateFriend(friend: Friend): Task<Void> {
         return fireStore.collection("Friends")
-            .document(friend.ownerEmail)
+            .document(friend.ownerUuid)
             .collection("friends")
-            .document(friend.friendEmail)
+            .document(friend.friendUuid)
             .set(friend.toMap())
     }
 }

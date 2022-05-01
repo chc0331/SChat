@@ -12,7 +12,7 @@ interface RemoteDataRepository {
 
     fun addFriend(friend: Friend): Task<Void>
 
-    fun getFriend(email: String): Task<QuerySnapshot>
+    fun getFriend(uuid: String): Task<QuerySnapshot>
 
     fun addUser(user: User): Task<Void>
 

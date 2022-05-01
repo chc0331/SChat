@@ -6,11 +6,13 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "friends")
 data class Friend(
-    @ColumnInfo(name = "owner_email")
-    var ownerEmail: String = "",
+    @ColumnInfo(name = "owner_uuid")
+    var ownerUuid: String = "",
     @PrimaryKey
+    @ColumnInfo(name = "friend_uuid")
+    var friendUuid: String = "",
     @ColumnInfo(name = "friend_email")
-    var friendEmail: String,
+    var friendEmail: String = "",
     @ColumnInfo(name = "friend_name")
     var friendName: String = "",
     @ColumnInfo(name = "friend_phone")
@@ -19,7 +21,8 @@ data class Friend(
 
     fun toMap(): HashMap<String, String> {
         return hashMapOf(
-            "ownerEmail" to ownerEmail,
+            "friendUuid" to friendUuid,
+            "ownerUuid" to ownerUuid,
             "friendEmail" to friendEmail,
             "friendName" to friendName,
             "friendPhone" to friendPhone

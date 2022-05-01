@@ -1,5 +1,6 @@
 package com.example.myapplication.toyproject.presenter.chatting.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

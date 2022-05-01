@@ -11,6 +11,7 @@ import com.example.myapplication.data.toUser
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.QueryDocumentSnapshot
+import com.google.firebase.firestore.QuerySnapshot
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Maybe
 
@@ -68,8 +69,11 @@ class UserDataRepositoryImpl(
     override fun getUserByUuid(uuid: String): Task<DocumentSnapshot> =
         remoteDataRepository.getUserByUuid(uuid)
 
-    override fun getUserByEmail(email: String): Maybe<User> =
-        localDataRepository.getUserByEmail(email)
+//    override fun getUserByEmail(email: String): Maybe<User> =
+//        localDataRepository.getUserByEmail(email)
+
+    override fun getUserByEmail(email: String): Task<QuerySnapshot> =
+        remoteDataRepository.getUserByEmail(email)
 
 
     override fun getAllUsers(): Flowable<List<User>> {

@@ -1,6 +1,5 @@
 package com.example.myapplication.toyproject.presenter.chatting.profile.friend
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.myapplication.data.model.Friend
@@ -23,17 +22,22 @@ class AddListViewModel(private val repository: UserDataRepository) : FireBaseVie
 
         //find friend
         repository.getUserByEmail(email)
-            .doOnError { Log.e("heec.choi", "onError") }
-            .doOnComplete {
-                _success.postValue(false)
-                Log.d("heec.choi", "onComplete")
-            }.doOnSuccess {
-                val friend = Friend(getUserEmail(), it.email, it.name, it.phone)
-                //add friend
-                repository.addFriend(friend).subscribe {
-                    _success.postValue(true)
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    if (document["email"]!! == email) {
+                        val friend = Friend(
+                            getUserUUID(),
+                            document["uuid"] as String, document["email"] as String,
+                            document["name"] as String, document["phone"] as String
+                        )
+                        repository.addFriend(friend).subscribe {
+                            _success.postValue(true)
+                        }
+                        break
+                    }
                 }
-                Log.d("heec.choi", "success $it")
-            }.subscribe()
+            }.addOnFailureListener {
+                _success.postValue(false)
+            }
     }
 }
