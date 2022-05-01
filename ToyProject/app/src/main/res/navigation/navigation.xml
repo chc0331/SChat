@@ -99,7 +99,11 @@
     <fragment
         android:id="@+id/messengerFragment"
         android:name="com.example.myapplication.toyproject.presenter.chatting.messenger.MessengerFragment"
-        android:label="MessengerFragment" />
+        android:label="MessengerFragment" >
+        <argument
+            android:name="friend_args"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/ownerProfileFragment"
         android:name="com.example.myapplication.toyproject.presenter.chatting.profile.owner.OwnerProfileFragment"

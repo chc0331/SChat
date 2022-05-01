@@ -1,6 +1,7 @@
 package com.example.myapplication.toyproject.presenter.chatting.messenger
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.NavigationUI
 import com.example.myapplication.toyproject.R
 import com.example.myapplication.toyproject.databinding.FragmentMessengerBinding
@@ -18,6 +20,10 @@ class MessengerFragment : Fragment() {
 
     private lateinit var binding: FragmentMessengerBinding
     private val vm: MessengerViewModel by viewModels()
+    private val friendUuid: String by lazy {
+        val args: MessengerFragmentArgs by navArgs()
+        args.friendArgs
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,7 +46,6 @@ class MessengerFragment : Fragment() {
         }
         binding.sendText.setOnClickListener {
             val text = binding.chatEditText.text.toString()
-
         }
     }
 

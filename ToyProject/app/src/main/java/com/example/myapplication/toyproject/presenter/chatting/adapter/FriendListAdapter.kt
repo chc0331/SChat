@@ -41,7 +41,7 @@ class FriendListAdapter :
                     goToUserProfileFragment(it, ParcelableFriend.friendToParcelable(friend))
                 }
                 this.root.setOnClickListener {
-                    goToMessengerFragment(it)
+                    goToMessengerFragment(it, friend.friendUuid)
                 }
                 //바인딩 즉시 실행
                 this.executePendingBindings()
@@ -54,8 +54,8 @@ class FriendListAdapter :
         Navigation.findNavController(view).navigate(action)
     }
 
-    private fun goToMessengerFragment(view: View) {
-        val action = FriendListFragmentDirections.actionGoToMessengerFragment()
+    private fun goToMessengerFragment(view: View, friendId: String) {
+        val action = FriendListFragmentDirections.actionGoToMessengerFragment(friendId)
         Navigation.findNavController(view).navigate(action)
     }
 }
