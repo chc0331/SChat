@@ -1,8 +1,6 @@
 package com.example.myapplication.toyproject.presenter.chatting.profile.owner
 
-import android.content.Context
 import android.net.Uri
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.myapplication.data.model.User
@@ -29,7 +27,11 @@ class OwnerProfileViewModel(private val repository: UserDataRepository) : FireBa
         }
     }
 
-    fun changeUserProfile(context: Context, name: String, phone: String, password: String) {
+    fun changeUserProfile(
+        name: String,
+        phone: String,
+        password: String
+    ): Boolean {
         if (name.isNotEmpty() && phone.isNotEmpty()
             && password.isNotEmpty() && password.length >= 6
         ) {
@@ -49,8 +51,9 @@ class OwnerProfileViewModel(private val repository: UserDataRepository) : FireBa
                 }
                 updateImageDatabase(imageUri!!, user)
             }
-            Toast.makeText(context, "Profile Update", Toast.LENGTH_SHORT).show()
+            return true
         }
+        return false
     }
 
     private fun updateImageDatabase(uri: Uri, user: User) {

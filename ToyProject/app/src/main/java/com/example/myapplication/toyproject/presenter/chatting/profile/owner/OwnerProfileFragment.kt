@@ -3,13 +3,14 @@ package com.example.myapplication.toyproject.presenter.chatting.profile.owner
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.myapplication.toyproject.R
 import com.example.myapplication.toyproject.core.BaseFragment
@@ -65,17 +66,28 @@ class OwnerProfileFragment : BaseFragment() {
             startForResult.launch(intent)
         }
         binding.changeProfileOk.setOnClickListener {
-            vm?.changeUserProfile(
-                context!!,
-                binding.editProfileName.text.toString(),
-                binding.editProfilePhone.text.toString(),
-                binding.editProfilePassword.text.toString()
-            )
+            if (vm!!.changeUserProfile(
+                    binding.editProfileName.text.toString(),
+                    binding.editProfilePhone.text.toString(),
+                    binding.editProfilePassword.text.toString()
+                )
+            ) {
+                Toast.makeText(context, "Profile update success", Toast.LENGTH_SHORT).show()
+                goToSettingsFragment()
+            } else
+                Toast.makeText(context, "Profile update fail", Toast.LENGTH_SHORT).show()
+        }
+        binding.changeProfileCancel.setOnClickListener {
+            goToSettingsFragment()
         }
     }
 
     override fun onResume() {
         super.onResume()
         vm.updateUserProfile()
+    }
+
+    private fun goToSettingsFragment() {
+        findNavController().popBackStack()
     }
 }
