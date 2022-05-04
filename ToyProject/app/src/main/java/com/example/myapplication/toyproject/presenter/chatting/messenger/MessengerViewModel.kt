@@ -10,14 +10,17 @@ class MessengerViewModel : FireBaseViewModel() {
 
     fun sendText(text: String, receiver: String) {
         val sender = getUserUUID()
+        val document = db.collection("Chats").document()
+        val messageId = document.id
         val messageHashMap = hashMapOf(
             "sender" to sender,
             "receiver" to receiver,
             "contents" to text,
-            "url" to ""
+            "url" to "",
+            "messageId" to messageId
         )
 
-        db.collection("Chats").document().set(messageHashMap)
+        document.set(messageHashMap)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Log.d("heec.choi", "successful")

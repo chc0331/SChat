@@ -46,7 +46,10 @@ class MessengerFragment : Fragment() {
         }
         binding.sendText.setOnClickListener {
             val text = binding.chatEditText.text.toString()
+            vm.sendText(text, friendUuid)
         }
+
+
     }
 
     override fun onResume() {
