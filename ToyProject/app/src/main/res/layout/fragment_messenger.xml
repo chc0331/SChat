@@ -18,7 +18,17 @@
             app:layout_constraintTop_toTopOf="parent"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/chat_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/chatting_layout"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
         <RelativeLayout
+            android:id="@+id/chatting_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -45,7 +55,8 @@
                 android:background="@color/white_gray"
                 android:ems="10"
                 android:hint="Write message here"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:padding="8dp" />
 
             <ImageView
                 android:id="@+id/send_text"

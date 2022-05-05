@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.NavigationUI
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.toyproject.R
 import com.example.myapplication.toyproject.databinding.FragmentMessengerBinding
 
@@ -48,12 +49,17 @@ class MessengerFragment : Fragment() {
             val text = binding.chatEditText.text.toString()
             vm.sendText(text, friendUuid)
         }
-
+        binding.chatList.layoutManager = LinearLayoutManager(context)
+        vm.list.observe(viewLifecycleOwner) {
+            val adapter = MessengerListAdapter(it)
+            binding.chatList.adapter = adapter
+        }
 
     }
 
     override fun onResume() {
         super.onResume()
+        vm.getChatsList(friendUuid)
         setSoftKeyboardMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
     }
 
