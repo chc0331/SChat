@@ -16,6 +16,7 @@ import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.toyproject.R
 import com.example.myapplication.toyproject.databinding.FragmentMessengerBinding
+import com.example.myapplication.toyproject.util.VerticalSpaceItemDecoration
 
 class MessengerFragment : Fragment() {
 
@@ -50,6 +51,7 @@ class MessengerFragment : Fragment() {
             vm.sendText(text, friendUuid)
         }
         binding.chatList.layoutManager = LinearLayoutManager(context)
+        binding.chatList.addItemDecoration(VerticalSpaceItemDecoration(20))
         vm.list.observe(viewLifecycleOwner) {
             val adapter = MessengerListAdapter(friendUuid, it)
             binding.chatList.adapter = adapter
