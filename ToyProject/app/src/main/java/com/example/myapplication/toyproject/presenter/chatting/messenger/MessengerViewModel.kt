@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.myapplication.data.model.Chat
 import com.example.myapplication.toyproject.core.FireBaseViewModel
+import com.example.myapplication.toyproject.util.set
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QueryDocumentSnapshot
 
@@ -11,8 +12,8 @@ class MessengerViewModel : FireBaseViewModel() {
 
     private val sender = getUserUUID()
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
-    private val _list = MutableLiveData<List<Chat>>()
-    val list: LiveData<List<Chat>>
+    private val _list = MutableLiveData<ArrayList<Chat>>().set(ArrayList())
+    val list: LiveData<ArrayList<Chat>>
         get() = _list
 
     fun getChatsList(receiver: String) {
@@ -46,6 +47,7 @@ class MessengerViewModel : FireBaseViewModel() {
             "url" to "",
             "messageId" to messageId
         )
+        val chat = Chat(text, messageId, receiver, sender, "")
 
         document.set(messageHashMap)
             .addOnCompleteListener { task ->
@@ -63,8 +65,12 @@ class MessengerViewModel : FireBaseViewModel() {
                                 "target" to sender
                             )
                         )
+                    _list.apply {
+                        value!!.add(chat)
+                        postValue(value)
+                    }
                 }
-            };
+            }
     }
 
     private fun checkChat(document: QueryDocumentSnapshot): Boolean {

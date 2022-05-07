@@ -40,6 +40,7 @@ class MessengerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val rootActivity = activity as AppCompatActivity
         val navController = findNavController()
+        val adapter = MessengerListAdapter(friendUuid)
         rootActivity?.setSupportActionBar(binding.toolbar)
         NavigationUI.setupActionBarWithNavController(rootActivity, navController)
         binding.toolbar.apply {
@@ -52,11 +53,10 @@ class MessengerFragment : Fragment() {
         }
         binding.chatList.layoutManager = LinearLayoutManager(context)
         binding.chatList.addItemDecoration(VerticalSpaceItemDecoration(20))
+        binding.chatList.adapter = adapter
         vm.list.observe(viewLifecycleOwner) {
-            val adapter = MessengerListAdapter(friendUuid, it)
-            binding.chatList.adapter = adapter
+            adapter.setList(it)
         }
-
     }
 
     override fun onResume() {

@@ -8,8 +8,9 @@ import com.example.myapplication.data.model.Chat
 import com.example.myapplication.toyproject.databinding.ChatListLayoutBinding
 import com.google.firebase.auth.FirebaseAuth
 
-class MessengerListAdapter(private val friendId: String, private val list: List<Chat>) :
+class MessengerListAdapter(private val friendId: String) :
     RecyclerView.Adapter<MessengerListAdapter.MessageViewHolder>() {
+    private var list: List<Chat> = listOf()
     private val userId = FirebaseAuth.getInstance().currentUser!!.uid
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
@@ -45,5 +46,10 @@ class MessengerListAdapter(private val friendId: String, private val list: List<
             //todo : need to add time property
 //            binding.time.text = chat.time
         }
+    }
+
+    fun setList(messenger: List<Chat>) {
+        this.list = messenger
+        notifyDataSetChanged()
     }
 }
