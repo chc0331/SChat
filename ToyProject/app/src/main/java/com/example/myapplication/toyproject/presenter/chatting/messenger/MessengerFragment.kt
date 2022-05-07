@@ -49,7 +49,9 @@ class MessengerFragment : Fragment() {
         }
         binding.sendText.setOnClickListener {
             val text = binding.chatEditText.text.toString()
+            binding.chatEditText.setText("")
             vm.sendText(text, friendUuid)
+
         }
         binding.chatList.layoutManager = LinearLayoutManager(context)
         binding.chatList.addItemDecoration(VerticalSpaceItemDecoration(20))
