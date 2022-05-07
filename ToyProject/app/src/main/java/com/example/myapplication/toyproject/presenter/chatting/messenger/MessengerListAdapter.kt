@@ -35,12 +35,14 @@ class MessengerListAdapter(private val friendId: String) :
                     friendChat.visibility = View.GONE
                     userChat.visibility = View.VISIBLE
                     userContent.text = chat.contents
+                    userTime.text = chat.chatTime
                 }
             } else if (chat.sender == friendId && chat.receiver == userId) {
                 binding.apply {
                     userChat.visibility = View.GONE
                     friendChat.visibility = View.VISIBLE
                     friendContent.text = chat.contents
+                    friendTime.text = chat.chatTime
                 }
             }
             //todo : need to add time property

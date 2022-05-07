@@ -5,5 +5,6 @@ data class Chat(
     val messageId: String,
     val receiver: String,
     val sender: String,
-    val url: String
+    val url: String,
+    val chatTime:String,
 )
