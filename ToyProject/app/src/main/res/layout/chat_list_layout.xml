@@ -6,23 +6,51 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp">
 
-        <TextView
-            android:id="@+id/content"
+        <LinearLayout
+            android:id="@+id/friend_chat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:background="@color/light_blue_4"
-            android:hint="content"
-            android:textStyle="bold" />
+            android:layout_alignParentLeft="true">
 
-        <TextView
-            android:id="@+id/time"
+            <TextView
+                android:id="@+id/friend_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/light_blue_4"
+                android:hint="content"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/friend_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="time"
+                android:textSize="8sp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/user_chat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/content"
-            android:layout_toLeftOf="@+id/content"
-            android:gravity="right"
-            android:hint="time"
-            android:textSize="8sp" />
+            android:layout_alignParentRight="true">
+
+            <TextView
+                android:id="@+id/user_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="time"
+                android:textSize="8sp" />
+
+            <TextView
+                android:id="@+id/user_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/light_blue_4"
+                android:hint="content"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
     </RelativeLayout>
 </layout>

@@ -1,13 +1,16 @@
 package com.example.myapplication.toyproject.presenter.chatting.messenger
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.data.model.Chat
 import com.example.myapplication.toyproject.databinding.ChatListLayoutBinding
+import com.google.firebase.auth.FirebaseAuth
 
-class MessengerListAdapter(private val list: List<Chat>) :
+class MessengerListAdapter(private val friendId: String, private val list: List<Chat>) :
     RecyclerView.Adapter<MessengerListAdapter.MessageViewHolder>() {
+    private val userId = FirebaseAuth.getInstance().currentUser!!.uid
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -26,7 +29,19 @@ class MessengerListAdapter(private val list: List<Chat>) :
     inner class MessageViewHolder(val binding: ChatListLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(chat: Chat) {
-            binding.content.text = chat.contents
+            if (chat.sender == userId && chat.receiver == friendId) {
+                binding.apply {
+                    friendChat.visibility = View.GONE
+                    userChat.visibility = View.VISIBLE
+                    userContent.text = chat.contents
+                }
+            } else if (chat.sender == friendId && chat.receiver == userId) {
+                binding.apply {
+                    userChat.visibility = View.GONE
+                    friendChat.visibility = View.VISIBLE
+                    friendContent.text = chat.contents
+                }
+            }
             //todo : need to add time property
 //            binding.time.text = chat.time
         }

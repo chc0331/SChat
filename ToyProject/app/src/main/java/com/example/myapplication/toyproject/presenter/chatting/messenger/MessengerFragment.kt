@@ -51,7 +51,7 @@ class MessengerFragment : Fragment() {
         }
         binding.chatList.layoutManager = LinearLayoutManager(context)
         vm.list.observe(viewLifecycleOwner) {
-            val adapter = MessengerListAdapter(it)
+            val adapter = MessengerListAdapter(friendUuid, it)
             binding.chatList.adapter = adapter
         }
 
