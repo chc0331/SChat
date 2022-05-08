@@ -20,6 +20,13 @@ class MessengerViewModel : FireBaseViewModel() {
     val list: LiveData<ArrayList<Chat>>
         get() = _list
 
+    init {
+        db.collection("Chats")
+            .addSnapshotListener { snapshot, exception ->
+                getChatsList("receiver")
+            }
+    }
+
     fun getChatsList(receiver: String) {
         val chatList = ArrayList<Chat>()
         db.collection("Chats")
@@ -47,7 +54,10 @@ class MessengerViewModel : FireBaseViewModel() {
         val document = db.collection("Chats").document()
         val messageId = document.id
         val date = Date(System.currentTimeMillis())
-        val time = SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(date)
+        val tz = TimeZone.getTimeZone("Asia/Seoul")
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREAN)
+        dateFormat.timeZone = tz
+        val time = dateFormat.format(date)
         val chat = Chat(text, messageId, receiver, sender, "", time)
         val messageHashMap = hashMapOf(
             "sender" to sender,
