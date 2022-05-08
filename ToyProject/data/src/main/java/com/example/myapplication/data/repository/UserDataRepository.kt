@@ -6,7 +6,7 @@ import com.example.myapplication.data.model.User
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.QuerySnapshot
-import io.reactivex.rxjava3.core.*
+import io.reactivex.rxjava3.core.Flowable
 
 interface UserDataRepository {
 
@@ -14,11 +14,11 @@ interface UserDataRepository {
 
     fun initUserData()
 
-    fun addFriend(friend: Friend): Completable
+    fun addFriend(friend: Friend): Task<Void>
 
     fun getFriend(email: String, result: MutableLiveData<Friend>)
 
-    fun getAllFriends(): Flowable<List<Friend>>
+    fun getAllFriends(userId: String): Task<QuerySnapshot>
 
     fun addUser(user: User)
 

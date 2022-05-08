@@ -49,13 +49,13 @@ class UserDataRepositoryImpl(
             }.subscribe()
     }
 
-    override fun addFriend(friend: Friend) = localDataRepository.addFriend(friend)
+    override fun addFriend(friend: Friend) = remoteDataRepository.addFriend(friend)
 
     override fun getFriend(email: String, result: MutableLiveData<Friend>) =
         localDataRepository.getFriend(email, result)
 
-    override fun getAllFriends(): Flowable<List<Friend>> {
-        return localDataRepository.getAllFriends()
+    override fun getAllFriends(userId:String): Task<QuerySnapshot> {
+        return remoteDataRepository.getAllFriends(userId)
     }
 
     override fun addUser(user: User) {

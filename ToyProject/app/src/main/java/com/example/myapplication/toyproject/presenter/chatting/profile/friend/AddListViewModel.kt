@@ -30,7 +30,7 @@ class AddListViewModel(private val repository: UserDataRepository) : FireBaseVie
                             document["uuid"] as String, document["email"] as String,
                             document["name"] as String, document["phone"] as String
                         )
-                        repository.addFriend(friend).subscribe {
+                        repository.addFriend(friend).addOnSuccessListener {
                             _success.postValue(true)
                         }
                         break

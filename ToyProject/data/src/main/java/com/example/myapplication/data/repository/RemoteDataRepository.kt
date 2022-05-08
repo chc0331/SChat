@@ -22,7 +22,7 @@ interface RemoteDataRepository {
 
     fun getAllUsers(): Task<QuerySnapshot>
 
-    fun getAllFriends(): Task<QuerySnapshot>
+    fun getAllFriends(userId: String): Task<QuerySnapshot>
 
     fun updateUser(user: User): Task<Void>
 

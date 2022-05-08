@@ -19,8 +19,11 @@ class RemoteDataRepositoryImpl : RemoteDataRepository {
             .get()
     }
 
-    override fun getAllFriends(): Task<QuerySnapshot> {
-        return fireStore.collection("Friends").get()
+    override fun getAllFriends(userId: String): Task<QuerySnapshot> {
+        return fireStore.collection("Friends")
+            .document(userId)
+            .collection("friends")
+            .get()
     }
 
     override fun addFriend(friend: Friend): Task<Void> {
