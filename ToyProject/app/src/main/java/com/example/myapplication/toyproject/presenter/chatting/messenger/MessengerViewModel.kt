@@ -6,6 +6,7 @@ import com.example.myapplication.data.model.Chat
 import com.example.myapplication.toyproject.core.FireBaseViewModel
 import com.example.myapplication.toyproject.util.set
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QueryDocumentSnapshot
 import java.text.SimpleDateFormat
 import java.util.*
@@ -22,6 +23,7 @@ class MessengerViewModel : FireBaseViewModel() {
     fun getChatsList(receiver: String) {
         val chatList = ArrayList<Chat>()
         db.collection("Chats")
+            .orderBy("chatTime", Query.Direction.ASCENDING)
             .get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
