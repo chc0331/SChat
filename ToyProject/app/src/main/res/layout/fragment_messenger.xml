@@ -63,9 +63,8 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_alignParentRight="true"
-                android:src="@drawable/ic_enter_chat"
                 android:background="?android:attr/selectableItemBackground"
-                />
+                android:src="@drawable/ic_enter_chat" />
 
         </RelativeLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

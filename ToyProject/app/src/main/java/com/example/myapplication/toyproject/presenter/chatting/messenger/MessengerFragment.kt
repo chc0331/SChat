@@ -51,13 +51,13 @@ class MessengerFragment : Fragment() {
             val text = binding.chatEditText.text.toString()
             binding.chatEditText.setText("")
             vm.sendText(text, friendUuid)
-
         }
         binding.chatList.layoutManager = LinearLayoutManager(context)
         binding.chatList.addItemDecoration(VerticalSpaceItemDecoration(20))
         binding.chatList.adapter = adapter
         vm.list.observe(viewLifecycleOwner) {
             adapter.setList(it)
+            binding.chatList.scrollToPosition(it.size - 1)
         }
     }
 
