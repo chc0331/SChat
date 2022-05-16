@@ -1,8 +1,10 @@
 package com.example.myapplication.toyproject.presenter.chatting.profile.owner
 
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.fragment.findNavController
 import com.example.myapplication.data.model.User
 import com.example.myapplication.data.repository.UserDataRepository
 import com.example.myapplication.data.toUser
@@ -21,6 +23,9 @@ class OwnerProfileViewModel(private val repository: UserDataRepository) : FireBa
     private var _updateSuccess: MutableLiveData<Boolean> = MutableLiveData()
     val updateSuccess: LiveData<Boolean>
         get() = _updateSuccess
+    private var _initSuccess: MutableLiveData<Boolean> = MutableLiveData()
+    val initSuccess: LiveData<Boolean>
+        get() = _initSuccess
     var imageUri: Uri? = null
 
     fun updateUserProfile() {
@@ -35,7 +40,7 @@ class OwnerProfileViewModel(private val repository: UserDataRepository) : FireBa
         name: String,
         phone: String,
         password: String
-    ): Boolean {
+    ) {
         if (name.isNotEmpty() && phone.isNotEmpty()
             && password.isNotEmpty() && password.length >= 6
         ) {
@@ -57,9 +62,7 @@ class OwnerProfileViewModel(private val repository: UserDataRepository) : FireBa
                 }
                 updateImageDatabase(imageUri!!, user)
             }
-            return true
         }
-        return false
     }
 
     private fun updateImageDatabase(uri: Uri, user: User) {
@@ -79,11 +82,13 @@ class OwnerProfileViewModel(private val repository: UserDataRepository) : FireBa
         }
     }
 
-    fun updateStart() {
+    private fun updateEnd() {
         _updateSuccess.postValue(true)
     }
 
-    fun updateEnd() {
-        _updateSuccess.postValue(false)
+    fun initEnd() {
+        _initSuccess.postValue(true)
     }
+
+
 }

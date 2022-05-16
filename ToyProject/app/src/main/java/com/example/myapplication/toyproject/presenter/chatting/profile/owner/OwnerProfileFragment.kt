@@ -7,6 +7,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -68,6 +69,24 @@ class OwnerProfileFragment : BaseFragment() {
                 editProfileName.setText(it.name)
                 editProfilePhone.setText(it.phone)
                 editProfilePassword.setText(it.password)
+                vm.initEnd()
+            }
+        })
+        vm.updateSuccess.observe(viewLifecycleOwner, {
+            if (it) {
+                Toast.makeText(context, "Profile update success", Toast.LENGTH_SHORT).show()
+                goToSettingsFragment()
+                if (dialog.isShowing)
+                    dialog.dismiss()
+            } else {
+                Toast.makeText(context, "Profile update fail", Toast.LENGTH_SHORT).show()
+                if (dialog.isShowing)
+                    dialog.dismiss()
+            }
+        })
+        vm.initSuccess.observe(viewLifecycleOwner, {
+            if (dialog.isShowing) {
+                dialog.dismiss()
             }
         })
 
@@ -77,17 +96,12 @@ class OwnerProfileFragment : BaseFragment() {
             startForResult.launch(intent)
         }
         binding.changeProfileOk.setOnClickListener {
-            if (vm!!.changeUserProfile(
-                    binding.editProfileName.text.toString(),
-                    binding.editProfilePhone.text.toString(),
-                    binding.editProfilePassword.text.toString()
-                )
-            ) {
-                vm.updateStart()
-                Toast.makeText(context, "Profile update success", Toast.LENGTH_SHORT).show()
-                goToSettingsFragment()
-            } else
-                Toast.makeText(context, "Profile update fail", Toast.LENGTH_SHORT).show()
+            dialog.show()
+            vm!!.changeUserProfile(
+                binding.editProfileName.text.toString(),
+                binding.editProfilePhone.text.toString(),
+                binding.editProfilePassword.text.toString()
+            )
         }
         binding.changeProfileCancel.setOnClickListener {
             goToSettingsFragment()
@@ -96,6 +110,9 @@ class OwnerProfileFragment : BaseFragment() {
             window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             requestWindowFeature(Window.FEATURE_NO_TITLE)
         }
+        if (dialog.isShowing)
+            dialog.dismiss()
+        dialog.show()
         vm.updateUserProfile()
     }
 
