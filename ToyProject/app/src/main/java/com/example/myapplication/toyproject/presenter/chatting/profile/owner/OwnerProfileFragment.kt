@@ -49,7 +49,7 @@ class OwnerProfileFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        vm.user.observe(viewLifecycleOwner, { it ->
+        vm.user.observe(viewLifecycleOwner, {
             binding.apply {
                 Glide.with(activity!!).load(it.image)
                     .placeholder(R.drawable.ic_profile_icon)
@@ -80,10 +80,6 @@ class OwnerProfileFragment : BaseFragment() {
         binding.changeProfileCancel.setOnClickListener {
             goToSettingsFragment()
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
         vm.updateUserProfile()
     }
 

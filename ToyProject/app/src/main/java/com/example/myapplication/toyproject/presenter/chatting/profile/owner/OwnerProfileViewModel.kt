@@ -13,6 +13,7 @@ import java.util.*
 
 class OwnerProfileViewModel(private val repository: UserDataRepository) : FireBaseViewModel() {
     private val TAG: String = OwnerProfileViewModel::class.java.simpleName
+    private val uuid: String = getUserUUID()
     private val storage: FirebaseStorage = FirebaseStorage.getInstance()
     private var _user: MutableLiveData<User> = MutableLiveData()
     val user: LiveData<User>
@@ -20,7 +21,7 @@ class OwnerProfileViewModel(private val repository: UserDataRepository) : FireBa
     var imageUri: Uri? = null
 
     fun updateUserProfile() {
-        repository.getUserByUuid(getUserUUID()).addOnSuccessListener {
+        repository.getUserByUuid(uuid).addOnSuccessListener {
             val map = it.data as Map<String, Object>
             val user = map.toUser()
             _user.postValue(user)
