@@ -54,7 +54,7 @@ class UserDataRepositoryImpl(
     override fun getFriend(email: String, result: MutableLiveData<Friend>) =
         localDataRepository.getFriend(email, result)
 
-    override fun getAllFriends(userId:String): Task<QuerySnapshot> {
+    override fun getAllFriends(userId: String): Task<QuerySnapshot> {
         return remoteDataRepository.getAllFriends(userId)
     }
 
@@ -88,13 +88,13 @@ class UserDataRepositoryImpl(
         localDataRepository.deleteAllFriends()
     }
 
-    override fun updateUser(user: User) {
-        remoteDataRepository.updateUser(user)
-        localDataRepository.updateUser(user)
+    override fun updateUser(user: User): Task<Void> {
+        return remoteDataRepository.updateUser(user)
+//        localDataRepository.updateUser(user)
     }
 
     override fun updateFriend(friend: Friend) {
         remoteDataRepository.updateFriend(friend)
-        localDataRepository.updateFriend(friend)
+//        localDataRepository.updateFriend(friend)
     }
 }

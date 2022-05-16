@@ -34,7 +34,7 @@ interface UserDataRepository {
 
     fun deleteAllFriends()
 
-    fun updateUser(user: User)
+    fun updateUser(user: User): Task<Void>
 
     fun updateFriend(friend: Friend)
 }

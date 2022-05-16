@@ -18,6 +18,9 @@ class OwnerProfileViewModel(private val repository: UserDataRepository) : FireBa
     private var _user: MutableLiveData<User> = MutableLiveData()
     val user: LiveData<User>
         get() = _user
+    private var _updateSuccess: MutableLiveData<Boolean> = MutableLiveData()
+    val updateSuccess: LiveData<Boolean>
+        get() = _updateSuccess
     var imageUri: Uri? = null
 
     fun updateUserProfile() {
@@ -43,7 +46,9 @@ class OwnerProfileViewModel(private val repository: UserDataRepository) : FireBa
                     it.phone = phone
                     it.password = password
                 }
-                repository.updateUser(user)
+                repository.updateUser(user).addOnCompleteListener {
+                    updateEnd()
+                }
             } else {
                 user!!.also {
                     it.name = name
@@ -66,9 +71,19 @@ class OwnerProfileViewModel(private val repository: UserDataRepository) : FireBa
                     task.metadata?.reference?.downloadUrl?.addOnSuccessListener {
                         val url = it.toString()
                         user.image = url
-                        repository.updateUser(user)
+                        repository.updateUser(user).addOnCompleteListener {
+                            updateEnd()
+                        }
                     }
                 }
         }
+    }
+
+    fun updateStart() {
+        _updateSuccess.postValue(true)
+    }
+
+    fun updateEnd() {
+        _updateSuccess.postValue(false)
     }
 }

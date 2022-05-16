@@ -1,11 +1,16 @@
 package com.example.myapplication.toyproject.presenter.chatting.profile.owner
 
 import android.app.Activity
+import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
@@ -24,6 +29,11 @@ class OwnerProfileFragment : BaseFragment() {
         ViewModelProvider(this, ViewModelFactory(userRepository)).get(
             OwnerProfileViewModel::class.java
         )
+    }
+    private val dialog: Dialog by lazy {
+        AlertDialog.Builder(context)
+            .setView(R.layout.progress_dialog)
+            .create()
     }
     private val startForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -60,6 +70,7 @@ class OwnerProfileFragment : BaseFragment() {
                 editProfilePassword.setText(it.password)
             }
         })
+
         binding.profileImage.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
@@ -72,6 +83,7 @@ class OwnerProfileFragment : BaseFragment() {
                     binding.editProfilePassword.text.toString()
                 )
             ) {
+                vm.updateStart()
                 Toast.makeText(context, "Profile update success", Toast.LENGTH_SHORT).show()
                 goToSettingsFragment()
             } else
@@ -80,10 +92,21 @@ class OwnerProfileFragment : BaseFragment() {
         binding.changeProfileCancel.setOnClickListener {
             goToSettingsFragment()
         }
+        dialog?.apply {
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            requestWindowFeature(Window.FEATURE_NO_TITLE)
+        }
         vm.updateUserProfile()
     }
 
     private fun goToSettingsFragment() {
         findNavController().popBackStack()
+    }
+
+    private fun showProgressDialog(on: Boolean) {
+        if (on)
+            dialog.show()
+        else
+            dialog.dismiss()
     }
 }
