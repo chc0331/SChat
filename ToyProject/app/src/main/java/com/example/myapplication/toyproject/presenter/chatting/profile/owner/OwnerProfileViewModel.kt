@@ -1,14 +1,14 @@
 package com.example.myapplication.toyproject.presenter.chatting.profile.owner
 
 import android.net.Uri
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.navigation.fragment.findNavController
 import com.example.myapplication.data.model.User
 import com.example.myapplication.data.repository.UserDataRepository
 import com.example.myapplication.data.toUser
 import com.example.myapplication.toyproject.core.FireBaseViewModel
+import com.google.firebase.auth.EmailAuthProvider
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
 import java.text.SimpleDateFormat
 import java.util.*
@@ -45,22 +45,32 @@ class OwnerProfileViewModel(private val repository: UserDataRepository) : FireBa
             && password.isNotEmpty() && password.length >= 6
         ) {
             val user = _user.value
+            val email = user!!.email
+            val password = user!!.password
+            val credential = EmailAuthProvider.getCredential(email, password)
             if (imageUri == null) {
                 user!!.also {
                     it.name = name
                     it.phone = phone
                     it.password = password
                 }
-                repository.updateUser(user).addOnCompleteListener {
-                    updateEnd()
-                }
+
+                FirebaseAuth.getInstance().currentUser!!.reauthenticate(credential)
+                    .addOnCompleteListener {
+                        repository.updateUser(user).addOnCompleteListener {
+                            updateEnd()
+                        }
+                    }
             } else {
                 user!!.also {
                     it.name = name
                     it.phone = phone
                     it.password = password
                 }
-                updateImageDatabase(imageUri!!, user)
+                FirebaseAuth.getInstance().currentUser!!.reauthenticate(credential)
+                    .addOnCompleteListener {
+                        updateImageDatabase(imageUri!!, user)
+                    }
             }
         }
     }

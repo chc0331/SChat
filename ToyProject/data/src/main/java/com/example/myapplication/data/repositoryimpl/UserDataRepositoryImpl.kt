@@ -9,11 +9,11 @@ import com.example.myapplication.data.repository.UserDataRepository
 import com.example.myapplication.data.toFriend
 import com.example.myapplication.data.toUser
 import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.QuerySnapshot
 import io.reactivex.rxjava3.core.Flowable
-import io.reactivex.rxjava3.core.Maybe
 
 class UserDataRepositoryImpl(
     private val localDataRepository: LocalDataRepository,
@@ -89,6 +89,7 @@ class UserDataRepositoryImpl(
     }
 
     override fun updateUser(user: User): Task<Void> {
+        FirebaseAuth.getInstance().currentUser?.updatePassword(user.password)
         return remoteDataRepository.updateUser(user)
 //        localDataRepository.updateUser(user)
     }
