@@ -8,13 +8,11 @@ import com.example.myapplication.data.repository.UserDataRepository
 import com.example.myapplication.data.toUser
 import com.example.myapplication.toyproject.core.FireBaseViewModel
 import com.google.firebase.auth.EmailAuthProvider
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
 import java.text.SimpleDateFormat
 import java.util.*
 
 class OwnerProfileViewModel(private val repository: UserDataRepository) : FireBaseViewModel() {
-    private val TAG: String = OwnerProfileViewModel::class.java.simpleName
     private val uuid: String = getUserUUID()
     private val storage: FirebaseStorage = FirebaseStorage.getInstance()
     private var _user: MutableLiveData<User> = MutableLiveData()
@@ -44,34 +42,28 @@ class OwnerProfileViewModel(private val repository: UserDataRepository) : FireBa
         if (name.isNotEmpty() && phone.isNotEmpty()
             && password.isNotEmpty() && password.length >= 6
         ) {
-            val user = _user.value
-            val email = user!!.email
-            val password = user!!.password
-            val credential = EmailAuthProvider.getCredential(email, password)
-            if (imageUri == null) {
-                user!!.also {
-                    it.name = name
-                    it.phone = phone
-                    it.password = password
-                }
-
-                FirebaseAuth.getInstance().currentUser!!.reauthenticate(credential)
-                    .addOnCompleteListener {
+            val user = this.user.value
+            val credential = EmailAuthProvider.getCredential(user!!.email, user!!.password)
+            auth.currentUser!!.reauthenticate(credential)
+                .addOnCompleteListener {
+                    if (imageUri == null) {
+                        user!!.also {
+                            it.name = name
+                            it.phone = phone
+                            it.password = password
+                        }
                         repository.updateUser(user).addOnCompleteListener {
                             updateEnd()
                         }
-                    }
-            } else {
-                user!!.also {
-                    it.name = name
-                    it.phone = phone
-                    it.password = password
-                }
-                FirebaseAuth.getInstance().currentUser!!.reauthenticate(credential)
-                    .addOnCompleteListener {
+                    } else {
+                        user!!.also {
+                            it.name = name
+                            it.phone = phone
+                            it.password = password
+                        }
                         updateImageDatabase(imageUri!!, user)
                     }
-            }
+                }
         }
     }
 

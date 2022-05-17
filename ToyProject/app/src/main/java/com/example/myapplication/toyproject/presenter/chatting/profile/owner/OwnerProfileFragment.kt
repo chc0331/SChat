@@ -119,11 +119,4 @@ class OwnerProfileFragment : BaseFragment() {
     private fun goToSettingsFragment() {
         findNavController().popBackStack()
     }
-
-    private fun showProgressDialog(on: Boolean) {
-        if (on)
-            dialog.show()
-        else
-            dialog.dismiss()
-    }
 }
